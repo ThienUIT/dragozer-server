@@ -20,55 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0b60fa34-fba7-404d-80ec-ebb3dfade6e4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prettierrc.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/semver" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/semver" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.yarn-integrity" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.yarn-integrity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/cacheable-request/node_modules/get-stream/buffer-stream.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/cacheable-request/node_modules/get-stream/index.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/cacheable-request/node_modules/get-stream/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/cacheable-request/node_modules/get-stream/license" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/cacheable-request/node_modules/get-stream/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/cacheable-request/node_modules/get-stream/readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/chalk/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/chalk/index.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/chalk/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/chalk/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/chalk/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/chalk/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/chalk/source/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/chalk/source/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/chalk/source/templates.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/chalk/source/templates.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/get-stream/buffer-stream.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/get-stream/buffer-stream.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/get-stream/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/get-stream/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/get-stream/license" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/get-stream/license" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/get-stream/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/get-stream/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/get-stream/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/get-stream/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/inherits/inherits.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/inherits/inherits.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/inherits/inherits_browser.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/inherits/inherits_browser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/inherits/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/inherits/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/is-obj/index.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/is-obj/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/is-obj/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/is-obj/license" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/is-obj/license" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/is-obj/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/is-obj/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/is-obj/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/is-obj/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ms/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/ms/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ms/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/ms/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ms/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/ms/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/nodemon/node_modules/ms/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/nodemon/node_modules/ms/license.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/nodemon/node_modules/ms/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/nodemon/node_modules/ms/readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/send/node_modules/inherits/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/send/node_modules/inherits/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/send/node_modules/inherits/inherits.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/send/node_modules/inherits/inherits_browser.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/send/node_modules/inherits/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/strip-json-comments/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/strip-json-comments/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/strip-json-comments/license" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/strip-json-comments/license" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/strip-json-comments/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/strip-json-comments/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/strip-json-comments/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/strip-json-comments/readme.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,11 +53,11 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
   <component name="RunManager">
@@ -152,7 +105,7 @@
       <workItem from="1602821336207" duration="2072000" />
       <workItem from="1602823440450" duration="572000" />
       <workItem from="1602824094038" duration="76000" />
-      <workItem from="1602826767775" duration="1821000" />
+      <workItem from="1602826767775" duration="2554000" />
     </task>
     <servers />
   </component>
