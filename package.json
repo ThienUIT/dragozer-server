@@ -5,9 +5,10 @@
   "private": true,
   "scripts": {
     "start": "node dist/index.js",
-    "serve": "nodemon --exec ts-node src/index.ts",
-    "lint": "vue-cli-service lint",
-    "build": "tsc -p"
+    "dev": "nodemon --exec ts-node src/index.ts",
+    "prod": "npm run build && npm run start",
+    "build": "tsc -p",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "url": "https://gitlab.com/vuetube/server.git",

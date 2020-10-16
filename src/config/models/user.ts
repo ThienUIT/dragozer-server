@@ -1,6 +1,8 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+
 const Schema = mongoose.Schema;
-const User = new Schema({
+const userSchema = new Schema({
+  id: { type: Number, required: true },
   email: { type: String, required: true },
   channelName: { type: String, required: true },
   password: { type: String, required: true },
@@ -14,4 +16,4 @@ const User = new Schema({
   updatedAt: { type: Date, default: Date.now() },
 });
 //name of model is snake-case linking to collection in database
-module.exports = mongoose.model("user", User);
+module.exports = mongoose.model("User", userSchema);
