@@ -1,30 +1,27 @@
 {
-    "env": {
-        "node": true
-    },
-    "extends": [
-        "plugin:vue/essential",
-        "eslint:recommended",
-        "@vue/typescript/recommended",
-        "@vue/prettier",
-        "@vue/prettier/@typescript-eslint"
-    ],
-    "parserOptions": {
-        "ecmaVersion": 2020,
-        "parser": "@typescript-eslint/parser",
-        "sourceType": "module"
-    },
-    "plugins": [
-        "vue",
-        "@typescript-eslint"
-    ],
-    "rules": {
-        "@typescript-eslint/ban-ts-ignore": "off",
-        "max-len": [
-            "error",
-            {
-                code: 160
-            }
-        ]
-    }
+  "env": {
+    "node": true
+  },
+  "extends": [
+    "plugin:vue/essential",
+    "eslint:recommended",
+    "@vue/typescript/recommended",
+    "@vue/prettier",
+    "@vue/prettier/@typescript-eslint"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "parser": "@typescript-eslint/parser",
+    "sourceType": "module"
+  },
+  "plugins": ["vue", "@typescript-eslint"],
+  "rules": {
+    "@typescript-eslint/ban-ts-ignore": "off",
+    "max-len": [
+      "error",
+      {
+        "code": 160
+      }
+    ]
+  }
 }
