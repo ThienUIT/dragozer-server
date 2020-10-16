@@ -18,16 +18,19 @@
   },
   "license": "MIT",
   "dependencies": {
-    "body-parser": "^1.19.0",
     "eslint": "^7.11.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^5.10.9"
   },
   "devDependencies": {
     "@types/express": "^4.17.8",
+    "@types/mongoose": "^5.7.36",
     "@types/morgan": "^1.9.1",
     "@types/node": "^14.11.8",
+    "body-parser": "^1.19.0",
     "husky": "^4.3.0",
     "lint-staged": "^10.4.0",
+    "module-alias": "^2.2.2",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.5",
     "prettier": "^2.1.2",
@@ -36,7 +39,7 @@
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
-      "prettier --single-quote --trailing--comma all --tab-width 4 --write  'src/**/*.{js,json}'"
+      "prettier --write"
     ]
   },
   "husky": {
