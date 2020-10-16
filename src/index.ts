@@ -1,8 +1,8 @@
-import express from 'express'
+import express, {Application, Request, Response, NextFunction} from 'express'
+const app: Application = express()
 
-const app = express()
-
-app.get('/', (req, res) => res.send("Hello world"))
+app.get('/', (req: Request, res: Response, next: NextFunction) => res.send("Hello woasdasdrld"))
 app.listen(8000, () => {
     console.log("Server running")
 })
+
