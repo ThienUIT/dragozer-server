@@ -10,7 +10,7 @@ const videoSchema = new Schema({
   photoUrl: {
     type: String,
     default:
-      "https://image.plo.vn/Uploaded/2020/xpckxpiu/2019_10_21/lisa-plo-1_jttt.jpg",
+      "https://i.pinimg.com/564x/27/65/e9/2765e93b591665f09e94bb59940d37f6.jpg",
   },
   userId: [{ type: Number, ref: "User" }],
   createdAt: { type: Date, default: Date.now() },

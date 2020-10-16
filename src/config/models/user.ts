@@ -11,7 +11,7 @@ const userSchema = new Schema({
     default:
       "https://image.plo.vn/Uploaded/2020/xpckxpiu/2019_10_21/lisa-plo-1_jttt.jpg",
   },
-  role: { type: Number, default: 2 },
+  role: { type: String, enum: ["user", "admin"], default: "user" },
   createdAt: { type: Date, default: Date.now() },
   updatedAt: { type: Date, default: Date.now() },
 });
