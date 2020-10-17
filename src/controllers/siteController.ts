@@ -1,12 +1,11 @@
 import { Request, Response } from "express";
 
 const { multipleMongooseToObject } = require("../utils/mongoose");
-const Video = require("../config/models/video");
 
-class OnePageController {
+class SiteController {
   // [GET]
   home(req: Request, res: Response) {
-    res.send("Home");
+    res.send("HELLO THIS IS HOME PAGE WITH VIDEOS");
   }
 
   // [GET] /search
@@ -20,4 +19,4 @@ class OnePageController {
   }
 }
 
-module.exports = new OnePageController();
+module.exports = new SiteController();

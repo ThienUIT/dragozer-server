@@ -1,9 +1,9 @@
 export class RouterConst {
   static readonly ROUTER_BASE = "/";
-  static readonly HOME = "/home";
+  static readonly FEED = "/feed";
   static readonly HISTORY = "/history";
   static readonly VIDEO = "/video";
-  static readonly SEARCH = "/search";
+  static readonly SEARCH = "/search_query";
   static readonly TRENDING = "/trending";
   static readonly WATCH = "/watch";
   static readonly CHANNELS = "/channels";
@@ -17,4 +17,5 @@ export class RouterConst {
   static readonly MONETIZATION = "/monetization";
   static readonly PLAYLIST = "/playlist";
   static readonly SUBTITLES = "/subtitles";
+  static readonly RESULT = "/result";
 }
