@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import colors from "colors";
-import { APP_CONNECT_DATABASE } from "../../shared/utils/config_env";
+import "module-alias/register";
+
+import { APP_CONNECT_DATABASE } from "@/shared/utils/config_env";
 
 async function connect() {
   try {

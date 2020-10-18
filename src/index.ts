@@ -1,5 +1,4 @@
 import { APP_PORT } from "./shared/utils/config_env";
-
 const colors = require("colors");
 const express = require("express");
 const morgan = require("morgan");
