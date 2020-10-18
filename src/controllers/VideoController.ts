@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
-const { multipleMongooseToObject } = require("../shared/utils/mongoose");
-const Videos = require("../models/Video");
+const { multipleMongooseToObject } = require("@/shared/utils/mongoose");
+const Videos = require("@/models/Video");
 
 class VideoController {
   // [GET] /watch

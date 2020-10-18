@@ -1,12 +1,12 @@
 import { NextFunction, Response, Request } from "express";
 import colors from "colors";
-import ErrorResponse from "./../utils/errorResponse";
+import ErrorResponse from "@/shared/utils/errorResponse";
 
 const errorHandler = (
   err: ErrorResponse,
   req: Request,
   res: Response,
-  next: NextFunction
+  _: NextFunction
 ) => {
   let error = {
     ...err,
@@ -14,7 +14,6 @@ const errorHandler = (
 
   error.message = err.message;
 
-  // console.log(err.stack.red);
   console.log(colors.red(err.stack!.red));
 
   // Mongoose bad ObjectId
