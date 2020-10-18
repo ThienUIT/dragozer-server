@@ -14,22 +14,24 @@
     "url": "https://gitlab.com/vuetube/server.git",
     "type": "git"
   },
-  "author": {
-    "name": "Trần Đình Thiện"
-  },
+  "author": "Trần Đình Thiện",
   "license": "MIT",
   "dependencies": {
-    "@types/dotenv": "^8.2.0",
-    "@types/jsonwebtoken": "^8.5.0",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "eslint": "^7.11.0",
     "express": "^4.17.1",
+    "helmet": "^4.1.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.9"
   },
   "devDependencies": {
     "@types/colors": "^1.2.1",
+    "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.8",
+    "@types/jsonwebtoken": "^8.5.0",
     "@types/mongoose": "^5.7.36",
     "@types/mongoose-unique-validator": "^1.0.4",
     "@types/morgan": "^1.9.1",

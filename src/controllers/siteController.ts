@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-const { multipleMongooseToObject } = require("../utils/mongoose");
+const { multipleMongooseToObject } = require("../shared/utils/mongoose");
 
 class SiteController {
   // [GET]
