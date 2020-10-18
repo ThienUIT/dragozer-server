@@ -1,20 +1,21 @@
 import mongoose from "mongoose";
+import { SchemaEnum } from "../shared/enum/schema.enum";
 
 const Schema = mongoose.Schema;
 const feelingSchema = new Schema(
   {
     type: {
       type: String,
-      enum: ["like", "dislike"],
+      enum: SchemaEnum.FEELING,
       required: [true, "Type is required either like or dislike"],
     },
     videoId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Video",
       required: [true, "Video id is required"],
     },
     userId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },

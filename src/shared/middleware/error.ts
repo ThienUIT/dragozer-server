@@ -1,6 +1,13 @@
-const ErrorResponse = require("../utils/errorResponse");
+import { NextFunction, Response, Request } from "express";
+import colors from "colors";
+import ErrorResponse from "./../utils/errorResponse";
 
-const errorHandler = (err, req, res, next) => {
+const errorHandler = (
+  err: ErrorResponse,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   let error = {
     ...err,
   };
@@ -8,7 +15,7 @@ const errorHandler = (err, req, res, next) => {
   error.message = err.message;
 
   // console.log(err.stack.red);
-  console.log(err);
+  console.log(colors.red(err.stack!.red));
 
   // Mongoose bad ObjectId
   if (err.name === "CastError") {
@@ -19,7 +26,7 @@ const errorHandler = (err, req, res, next) => {
   // console.log(err.name);
 
   // Mongoose duplicate key
-  if (err.code === 11000) {
+  if (err.statusCode === 11000) {
     const message = "Duplicate field value entered";
     console.log(err);
     error = new ErrorResponse(message, 400);
@@ -27,14 +34,14 @@ const errorHandler = (err, req, res, next) => {
 
   // Mongoose validation error
   if (err.name === "ValidationError") {
-    const message = [];
-    Object.values(err.errors).forEach((errr) => {
+    const message: Array<any> = [];
+    Object.values(err.statusCode).forEach((errr) => {
       message.push({
         field: errr.properties.path,
         message: errr.message,
       });
     });
-    error = new ErrorResponse(null, 400, message);
+    error = new ErrorResponse(message[0], 400, undefined);
   }
 
   res.status(error.statusCode || 500).json({

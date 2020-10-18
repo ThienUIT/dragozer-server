@@ -1,10 +1,10 @@
-import { APP_PORT } from "./utils/config_env";
+import { APP_PORT } from "./shared/utils/config_env";
 
 const colors = require("colors");
 const express = require("express");
 const morgan = require("morgan");
 const db = require("./config/database");
-const errorHandler = require("./middleware/error");
+const errorHandler = require("./shared/middleware/error");
 const route = require("./routes");
 
 const app = express();

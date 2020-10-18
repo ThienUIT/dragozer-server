@@ -1,5 +1,8 @@
 import crypto from "crypto";
 import { HookNextFunction } from "mongoose";
+import { Valid_dataConst } from "../shared/const/valid_data.const";
+import { DefaultSchemaConst } from "../shared/const/default_schema.const";
+import { SchemaEnum } from "../shared/enum/schema.enum";
 
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
@@ -22,29 +25,23 @@ const UserSchema = new Schema(
       required: [true, "Please add an email"],
       unique: true,
       uniqueCaseInsensitive: true,
-      match: [
-        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-        "Please add a valid email",
-      ],
+      match: [Valid_dataConst.VALID_EMAIL, "Please add a valid email"],
     },
     photoUrl: {
       type: String,
-      default: "no-photo.jpg",
+      default: DefaultSchemaConst.IMG_USER_DEFAULT,
     },
     role: {
       type: String,
-      enum: ["user", "admin"],
-      default: "user",
+      enum: SchemaEnum.ROLE,
+      default: DefaultSchemaConst.ROLE_USER,
     },
     password: {
       type: String,
       required: [true, "Please add a password"],
       minlength: [8, "Must be eight characters long"],
       select: false,
-      match: [
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
-        "Please add a valid password",
-      ],
+      match: [Valid_dataConst.VALID_PASSWORD, "Please add a valid password"],
     },
     resetPasswordToken: String,
     resetPasswordExpire: Date,

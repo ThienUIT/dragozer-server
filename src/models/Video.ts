@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import { DefaultSchemaConst } from "../shared/const/default_schema.const";
+import { SchemaEnum } from "../shared/enum/schema.enum";
 
 const Schema = mongoose.Schema;
 const videoSchema = new Schema(
@@ -13,7 +15,7 @@ const videoSchema = new Schema(
     },
     thumbnailUrl: {
       type: String,
-      default: "no-photo.jpg",
+      default: DefaultSchemaConst.IMG_VIDEO_DEFAULT,
     },
     views: {
       type: Number,
@@ -24,8 +26,8 @@ const videoSchema = new Schema(
     },
     status: {
       type: String,
-      enum: ["draft", "private", "public"],
-      default: "draft",
+      enum: SchemaEnum.PRIVACY,
+      default: DefaultSchemaConst.PRIVACY_DRAFT,
     },
     categoryId: {
       type: Schema.Types.ObjectId,
