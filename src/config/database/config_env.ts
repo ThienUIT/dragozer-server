@@ -14,5 +14,9 @@ switch (process.env.NODE_ENV) {
 }
 dotenv.config({ path: path });
 
+export const MAX_FILE_UPLOAD: number = parseInt(process.env.MAX_FILE_UPLOAD!);
 export const APP_PORT = process.env.APP_PORT;
 export const APP_CONNECT_DATABASE = process.env.APP_CONNECT_DATABASE;
+export const JWT_COOKIE_EXPIRE: number = parseInt(
+  process.env.JWT_COOKIE_EXPIRE!
+);

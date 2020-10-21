@@ -1,8 +1,8 @@
 import crypto from "crypto";
 import { HookNextFunction } from "mongoose";
-import { Valid_dataConst } from "../shared/const/valid_data.const";
-import { DefaultSchemaConst } from "../shared/const/default_schema.const";
-import { SchemaEnum } from "../shared/enum/schema.enum";
+import { ValidDataConst } from "@/shared/const/valid_data_const";
+import { DefaultSchemaConst } from "@/shared/const/default_schema.const";
+import { SchemaEnum } from "@/shared/enum/schema.enum";
 
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
@@ -25,7 +25,7 @@ const UserSchema = new Schema(
       required: [true, "Please add an email"],
       unique: true,
       uniqueCaseInsensitive: true,
-      match: [Valid_dataConst.VALID_EMAIL, "Please add a valid email"],
+      match: [ValidDataConst.VALID_EMAIL, "Please add a valid email"],
     },
     photoUrl: {
       type: String,
@@ -41,7 +41,7 @@ const UserSchema = new Schema(
       required: [true, "Please add a password"],
       minlength: [8, "Must be eight characters long"],
       select: false,
-      match: [Valid_dataConst.VALID_PASSWORD, "Please add a valid password"],
+      match: [ValidDataConst.VALID_PASSWORD, "Please add a valid password"],
     },
     resetPasswordToken: String,
     resetPasswordExpire: Date,
@@ -70,17 +70,21 @@ UserSchema.virtual("videos", {
 UserSchema.plugin(uniqueValidator, { message: "{PATH} already exists." });
 
 UserSchema.pre("find", function () {
-  UserSchema.populate({ path: "subscribers" });
+  // @ts-ignore
+  const currentUser = this;
+  currentUser.populate({ path: "subscribers" });
 });
 
 // Ecrypt Password
 UserSchema.pre("save", async function (next: HookNextFunction) {
-  if (!UserSchema.isModified("password")) {
+  // @ts-ignore
+  const currentUser = this;
+  if (!currentUser.isModified("password")) {
     next();
   }
 
   const salt = await bcrypt.genSalt(10);
-  UserSchema.password = await bcrypt.hash(UserSchema.password, salt);
+  currentUser.password = await bcrypt.hash(currentUser.password, salt);
 });
 
 UserSchema.methods.matchPassword = async function (enteredPassword: string) {

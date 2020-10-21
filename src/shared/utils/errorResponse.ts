@@ -1,5 +1,4 @@
-export default class ErrorResponse extends Error {
-  message: string;
+class ErrorResponse extends Error {
   statusCode: number;
   messageWithField: string | null;
 
@@ -7,6 +6,6 @@ export default class ErrorResponse extends Error {
     super(message);
     this.statusCode = statusCode;
     this.messageWithField = messageWithField || null;
-    this.message = message;
   }
 }
+module.exports = ErrorResponse;

@@ -1,9 +1,8 @@
 import { NextFunction, Response, Request } from "express";
 import colors from "colors";
-import ErrorResponse from "@/shared/utils/errorResponse";
-
+const { ErrorResponse } = require("@/shared/utils/errorResponse");
 const errorHandler = (
-  err: ErrorResponse,
+  err: typeof ErrorResponse,
   req: Request,
   res: Response,
   _: NextFunction
@@ -34,7 +33,7 @@ const errorHandler = (
   // Mongoose validation error
   if (err.name === "ValidationError") {
     const message: Array<any> = [];
-    Object.values(err.statusCode).forEach((errr) => {
+    Object.values(err.statusCode).forEach((errr: any) => {
       message.push({
         field: errr.properties.path,
         message: errr.message,

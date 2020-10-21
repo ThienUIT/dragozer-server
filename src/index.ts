@@ -1,15 +1,63 @@
-import { APP_PORT } from "./shared/utils/config_env";
-const colors = require("colors");
+import "module-alias/register";
+import { APP_PORT } from "@/config/database/config_env";
 const express = require("express");
+const colors = require("colors");
 const morgan = require("morgan");
-const db = require("./config/database");
-const errorHandler = require("./shared/middleware/error");
-const route = require("./routes");
+const cookieParser = require("cookie-parser");
+const mongoSanitize = require("express-mongo-sanitize");
+const fileUpload = require("express-fileupload");
+const helmet = require("helmet");
+const xss = require("xss-clean");
+const hpp = require("hpp");
+const cors = require("cors");
+const errorHandler = require("@/shared/middleware/errorHandler");
+const route = require("@/routes");
 
+const db = require("@/config/database");
 const app = express();
-app.use(morgan("combined"));
-app.use(errorHandler);
+
 db.connect();
+
+app.use(express.json());
+
+app.use(cookieParser());
+// console response
+app.use(morgan("dev"));
+
+// File uploading
+app.use(
+  fileUpload({
+    createParentPath: true,
+  })
+);
+
+// Sanitize data
+app.use(mongoSanitize());
+
+// Set security headers
+app.use(helmet());
+
+// Prevent XSS attacks
+app.use(xss());
+
+// Enable CORS
+app.use(cors());
+
+// Rate limiting
+// const limiter = rateLimit({
+//   windowMs: 10 * 60 * 1000, // 10 mins
+//   max: 100 // 100 request per 10 mins
+// })
+
+// app.use(limiter)
+
+// Prevent http param pollution
+app.use(hpp());
+
+// error Handler
+app.use(errorHandler);
+
+//Route init
 route(app);
 
 const server = app.listen(8000, () => {

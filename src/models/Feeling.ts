@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { SchemaEnum } from "../shared/enum/schema.enum";
+import { SchemaEnum } from "@/shared/enum/schema.enum";
 
 const Schema = mongoose.Schema;
 const feelingSchema = new Schema(

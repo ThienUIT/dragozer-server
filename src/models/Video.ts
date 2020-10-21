@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import { DefaultSchemaConst } from "../shared/const/default_schema.const";
-import { SchemaEnum } from "../shared/enum/schema.enum";
+import { DefaultSchemaConst } from "@/shared/const/default_schema.const";
+import { SchemaEnum } from "@/shared/enum/schema.enum";
 
 const Schema = mongoose.Schema;
 const videoSchema = new Schema(
