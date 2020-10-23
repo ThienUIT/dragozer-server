@@ -1,5 +1,7 @@
 import "module-alias/register";
 import { APP_PORT } from "@/config/database/config_env";
+import { NextFunction, Request, Response } from "express";
+
 const express = require("express");
 const colors = require("colors");
 const morgan = require("morgan");
@@ -41,7 +43,7 @@ app.use(helmet());
 app.use(xss());
 
 // Enable CORS
-app.use(cors());
+app.use(cors({ origin: "http://localhost:8081", optionsSuccessStatus: 200 }));
 
 // Rate limiting
 // const limiter = rateLimit({

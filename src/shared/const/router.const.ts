@@ -1,21 +1,13 @@
-export class RouterConst {
-  static readonly ROUTER_BASE = "/";
-  static readonly FEED = "/feed";
-  static readonly HISTORY = "/history";
-  static readonly VIDEO = "/video";
-  static readonly SEARCH = "/search_query";
-  static readonly TRENDING = "/trending";
-  static readonly WATCH = "/watch";
-  static readonly CHANNELS = "/channels";
-  static readonly SIGNIN = "/signin";
-  static readonly SIGNUP = "/signup";
-  static readonly STUDIO = "/studio";
-  static readonly COMMENTS = "/comments";
-  static readonly ANALYTICS = "/analytics";
-  static readonly AUDIO_LIBRARY = "/audio-library";
-  static readonly DETAILS = "/details";
-  static readonly MONETIZATION = "/monetization";
-  static readonly PLAYLIST = "/playlist";
-  static readonly SUBTITLES = "/subtitles";
-  static readonly RESULT = "/result";
+export class Route {
+  static readonly AUTH = "auth";
+  static readonly USERS = "users";
+  static readonly CATEGORIES = "categories";
+  static readonly VIDEOS = "videos";
+  static readonly COMMENTS = "comments";
+  static readonly REPLIES = "replies";
+  static readonly FEELINGS = "feelings";
+  static readonly SUBSCRIPTIONS = "subscriptions";
+  static readonly HISTORIES = "histories";
+  static readonly SEARCH = "search";
+  static readonly ROUTE_API = "/api/v1/";
 }

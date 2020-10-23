@@ -1,4 +1,5 @@
 import { Application } from "express";
+import { Route } from "@/shared/const/router.const";
 
 const authRoutes = require("@/routes/auth");
 const userRoutes = require("@/routes/users");
@@ -12,18 +13,18 @@ const historiesRoutes = require("@/routes/histories");
 const searchRoutes = require("@/routes/search");
 
 function route(app: Application) {
-  const versionOne = (routeName: string) => `/api/v1/${routeName}`;
+  const versionOne = (routeName: string) => `${Route.ROUTE_API}${routeName}`;
 
-  app.use(versionOne("auth"), authRoutes);
-  app.use(versionOne("users"), userRoutes);
-  app.use(versionOne("categories"), categoryRoutes);
-  app.use(versionOne("videos"), videoRoutes);
-  app.use(versionOne("comments"), commentRoutes);
-  app.use(versionOne("replies"), replyRoutes);
-  app.use(versionOne("feelings"), feelingRoutes);
-  app.use(versionOne("subscriptions"), subscriptionRoutes);
-  app.use(versionOne("histories"), historiesRoutes);
-  app.use(versionOne("search"), searchRoutes);
+  app.use(versionOne(Route.AUTH), authRoutes);
+  app.use(versionOne(Route.USERS), userRoutes);
+  app.use(versionOne(Route.CATEGORIES), categoryRoutes);
+  app.use(versionOne(Route.VIDEOS), videoRoutes);
+  app.use(versionOne(Route.COMMENTS), commentRoutes);
+  app.use(versionOne(Route.REPLIES), replyRoutes);
+  app.use(versionOne(Route.FEELINGS), feelingRoutes);
+  app.use(versionOne(Route.SUBSCRIPTIONS), subscriptionRoutes);
+  app.use(versionOne(Route.HISTORIES), historiesRoutes);
+  app.use(versionOne(Route.SEARCH), searchRoutes);
 }
 
 module.exports = route;
