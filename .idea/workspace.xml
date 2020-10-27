@@ -20,34 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0b60fa34-fba7-404d-80ec-ebb3dfade6e4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/_data/users.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/request/auth.request.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/request/category.request.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/request/comment.request.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/request/feeling.request.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/request/history.request.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/request/reply.request.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/request/search.request.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/request/subscription.request.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/request/video.request.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/response/auth.response.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/response/category.response.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/response/comment.response.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/response/feeling.response.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/response/history.response.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/response/reply.response.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/response/search.response.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/response/subscription.response.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/response/user.response.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/response/video.response.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/auth.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/const/router.const.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/const/router.const.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,6 +129,7 @@
       <workItem from="1603269853582" duration="4182000" />
       <workItem from="1603333632656" duration="1146000" />
       <workItem from="1603438094650" duration="80000" />
+      <workItem from="1603777078849" duration="4000" />
     </task>
     <servers />
   </component>
