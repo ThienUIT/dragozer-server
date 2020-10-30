@@ -14,6 +14,7 @@ const Video = require("../models/Video");
 // @access  Public Or Private
 exports.getVideos = asyncHandler(
   async (req: Request, res: any, next: NextFunction) => {
+    console.log("getvideos::", req);
     res.status(200).json(res.advancedResults);
   }
 );

@@ -1,5 +1,6 @@
 import { NextFunction, Response, Request } from "express";
 import colors from "colors";
+
 const { ErrorResponse } = require("@/shared/utils/errorResponse");
 const errorHandler = (
   err: typeof ErrorResponse,

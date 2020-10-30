@@ -1,18 +1,15 @@
-import { NextFunction, Request, Response } from "express";
-import {
-  JWT_COOKIE_EXPIRE,
-  MAX_FILE_UPLOAD,
-} from "@/config/database/config_env";
+import { NextFunction, Request, response, Response } from "express";
+import { COOKIE_EXPIRE, MAX_FILE_UPLOAD } from "@/config/database/config_env";
 import { UserRequest } from "@/config/request/user.requestt";
 
+const passport = require("passport");
 const crypto = require("crypto");
 const path = require("path");
 const asyncHandler = require("@/shared/middleware/async");
 const ErrorResponse = require("@/shared/utils/errorResponse");
 const sendEmail = require("@/shared/utils/sendEmail");
-
 const User = require("@/models/User");
-
+const GoogleUser = require("@/models/GoogleUser");
 // @desc    Register user
 // @route   POST /api/v1/auth/register
 // @access  Public
@@ -62,6 +59,23 @@ exports.login = asyncHandler(
     sendTokenResponse(user, 200, res);
   }
 );
+//@desc OAuth with google
+//@route GET /api/v1/auth/google
+//@access  Public
+exports.google = passport.authenticate("google", {
+  scope: ["profile", "email"],
+});
+//@desc Login Google api callback
+//@route POST /api/v1/auth/google/redirect
+//@access  Public
+exports.googleCallback = passport.authenticate("google", {
+  failureRedirect: "/api/v1/auth/google",
+});
+exports.googleLogin = asyncHandler(
+  (req: Request, res: Response, next: NextFunction) => {
+    res.status(200).json({ success: true, data: req.user });
+  }
+);
 
 // @desc    Log user out / clear cookie
 // @route   GET /api/v1/auth/logout
@@ -72,7 +86,7 @@ exports.logout = asyncHandler(
       expires: new Date(Date.now() + 10 * 1000),
       httpOnly: true,
     });
-
+    console.log("logout");
     res.status(200).json({ success: true, data: {} });
   }
 );
@@ -83,13 +97,13 @@ exports.logout = asyncHandler(
 exports.getMe = asyncHandler(
   async (req: UserRequest, res: Response, next: NextFunction) => {
     const user = req.user;
-
+    console.log("get-me::", user);
     res.status(200).json({ success: true, data: user });
   }
 );
 
 // @desc    Update user details
-// @route   PUT /api/v1/auth/updatedetails
+// @route   PUT /api/v1/auth/update_details
 // @access  Private
 exports.updateDetails = asyncHandler(
   async (req: UserRequest, res: Response, next: NextFunction) => {
@@ -151,7 +165,7 @@ exports.uploadChannelAvatar = asyncHandler(
 );
 
 // @desc    Update password
-// @route   PUT /api/v1/auth/updatepassword
+// @route   PUT /api/v1/auth/update_password
 // @access  Private
 exports.updatePassword = asyncHandler(
   async (req: UserRequest, res: Response, next: NextFunction) => {
@@ -178,7 +192,7 @@ exports.updatePassword = asyncHandler(
 );
 
 // @desc    Forgot password
-// @route   POST /api/v1/auth/forgotpassword
+// @route   POST /api/v1/auth/forgot_password
 // @access  Public
 exports.forgotPassword = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -194,7 +208,7 @@ exports.forgotPassword = asyncHandler(
 
     const resetUrl = `${req.protocol}://${req.get(
       "host"
-    )}/api/v1/auth/resetpassword/${resetToken}`;
+    )}/api/v1/auth/reset_password/${resetToken}`;
 
     const message = `You are receiving this email because you (or someone else) has requested the reset of a password. Please make a PUT request to: \n\n ${resetUrl}`;
 
@@ -218,7 +232,7 @@ exports.forgotPassword = asyncHandler(
 );
 
 // @desc    Reset password
-// @route   PUT /api/v1/auth/resetpassword/:resettoken
+// @route   PUT /api/v1/auth/reset_password/:resettoken
 // @access  Public
 exports.resetPassword = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -250,11 +264,14 @@ exports.resetPassword = asyncHandler(
 );
 
 // Get token from model, create cookie and send response
-const sendTokenResponse = (user: any, statusCode: number, res: Response) => {
+const sendTokenResponse = (
+  user: typeof User,
+  statusCode: number,
+  res: Response
+) => {
   const token = user.getSignedJwtToken();
-
   const options = {
-    expires: new Date(Date.now() + JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000),
+    expires: new Date(Date.now() + COOKIE_EXPIRE * 24 * 60 * 60 * 1000),
     httpOnly: true,
     secure: false,
   };

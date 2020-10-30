@@ -3,11 +3,11 @@ import { HookNextFunction } from "mongoose";
 import { ValidDataConst } from "@/shared/const/valid_data_const";
 import { DefaultSchemaConst } from "@/shared/const/default_schema.const";
 import { SchemaEnum } from "@/shared/enum/schema.enum";
+import { COOKIE_EXPIRE, TEXT_SECRET } from "@/config/database/config_env";
 
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
 const uniqueValidator = require("mongoose-unique-validator");
 
 const Schema = mongoose.Schema;
@@ -59,6 +59,7 @@ UserSchema.virtual("subscribers", {
   count: true,
   match: { userId: UserSchema._id },
 });
+
 UserSchema.virtual("videos", {
   ref: "Video",
   localField: "_id",
@@ -92,8 +93,8 @@ UserSchema.methods.matchPassword = async function (enteredPassword: string) {
 };
 
 UserSchema.methods.getSignedJwtToken = function () {
-  return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRE,
+  return jwt.sign({ id: this._id }, TEXT_SECRET, {
+    expiresIn: 24 * 60 * 60 * 1000 * COOKIE_EXPIRE,
   });
 };
 

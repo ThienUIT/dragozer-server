@@ -1,9 +1,15 @@
 import express from "express";
+
+const passportSetup = require("@/config/database/passport-setup");
 const routerAuth = express.Router();
-const { protect } = require("@/shared/middleware/auth");
+const { protect, oauthProtect } = require("@/shared/middleware/auth");
+
 const {
   register,
   login,
+  google,
+  googleCallback,
+  googleLogin,
   logout,
   getMe,
   forgotPassword,
@@ -13,14 +19,18 @@ const {
   updatePassword,
 } = require("@/controllers/auth");
 
+//Google OAuth2.0
+
 routerAuth.post("/register", register);
 routerAuth.post("/login", login);
+routerAuth.get("/google", google);
+routerAuth.get("/google/redirect", googleCallback, oauthProtect, googleLogin);
 routerAuth.post("/logout", logout);
 routerAuth.post("/me", protect, getMe);
-routerAuth.put("/updatedetails", protect, updateDetails);
+routerAuth.put("/update_details", protect, updateDetails);
 routerAuth.put("/avatar", protect, uploadChannelAvatar);
-routerAuth.put("/updatepassword", protect, updatePassword);
-routerAuth.post("/forgotpassword", forgotPassword);
-routerAuth.put("/resetpassword/:resettoken", resetPassword);
+routerAuth.put("/update_password", protect, updatePassword);
+routerAuth.post("/forgot_password", forgotPassword);
+routerAuth.put("/reset_password/:reset_token", resetPassword);
 
 module.exports = routerAuth;

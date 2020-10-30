@@ -1,6 +1,5 @@
 import { Application } from "express";
 import { Route } from "@/shared/const/router.const";
-
 const authRoutes = require("@/routes/auth");
 const userRoutes = require("@/routes/users");
 const categoryRoutes = require("@/routes/categories");

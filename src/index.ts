@@ -1,10 +1,11 @@
 import "module-alias/register";
-import { APP_PORT } from "@/config/database/config_env";
-import { NextFunction, Request, Response } from "express";
+import { APP_PORT, TEXT_SECRET } from "@/config/database/config_env";
+import passport from "passport";
 
 const express = require("express");
 const colors = require("colors");
 const morgan = require("morgan");
+const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
 const mongoSanitize = require("express-mongo-sanitize");
 const fileUpload = require("express-fileupload");
@@ -43,7 +44,12 @@ app.use(helmet());
 app.use(xss());
 
 // Enable CORS
-app.use(cors({ origin: "http://localhost:8081", optionsSuccessStatus: 200 }));
+app.use(
+  cors({
+    origin: ["http://localhost", "http://localhost:8080"],
+    optionsSuccessStatus: 200,
+  })
+);
 
 // Rate limiting
 // const limiter = rateLimit({
@@ -55,6 +61,16 @@ app.use(cors({ origin: "http://localhost:8081", optionsSuccessStatus: 200 }));
 
 // Prevent http param pollution
 app.use(hpp());
+
+app.use(
+  cookieSession({
+    maxAge: 24 * 60 * 60 * 100,
+    keys: [TEXT_SECRET],
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // error Handler
 app.use(errorHandler);
