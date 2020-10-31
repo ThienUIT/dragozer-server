@@ -1,13 +1,14 @@
 import "module-alias/register";
 import { APP_PORT, TEXT_SECRET } from "@/config/database/config_env";
-import passport from "passport";
 
-const express = require("express");
+const passport = require("passport");
 const colors = require("colors");
+const express = require("express");
 const morgan = require("morgan");
 const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
 const mongoSanitize = require("express-mongo-sanitize");
+const rateLimit = require("express-rate-limit");
 const fileUpload = require("express-fileupload");
 const helmet = require("helmet");
 const xss = require("xss-clean");
@@ -15,14 +16,13 @@ const hpp = require("hpp");
 const cors = require("cors");
 const errorHandler = require("@/shared/middleware/errorHandler");
 const route = require("@/routes");
-
 const db = require("@/config/database");
 const app = express();
 
 db.connect();
-
+// Instead of use body-parser, I use express
 app.use(express.json());
-
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 // console response
 app.use(morgan("dev"));
@@ -52,25 +52,25 @@ app.use(
 );
 
 // Rate limiting
-// const limiter = rateLimit({
-//   windowMs: 10 * 60 * 1000, // 10 mins
-//   max: 100 // 100 request per 10 mins
-// })
-
-// app.use(limiter)
-
-// Prevent http param pollution
-app.use(hpp());
-
 app.use(
-  cookieSession({
-    maxAge: 24 * 60 * 60 * 100,
-    keys: [TEXT_SECRET],
+  rateLimit({
+    windowMs: 10 * 60 * 1000, // 10 mins
+    max: 100, // 100 request per 10 mins
   })
 );
 
+// Prevent http param pollution
+app.use(hpp());
+// cookieSession
+// app.use(
+//     cookieSession({
+//         maxAge: 24 * 60 * 60 * 1000,
+//         keys: [TEXT_SECRET, TEXT_SECRET],
+//     })
+// );
+// Initialize the passport object on every request
 app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.session());
 
 // error Handler
 app.use(errorHandler);

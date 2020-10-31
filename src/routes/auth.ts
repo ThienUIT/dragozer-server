@@ -2,7 +2,7 @@ import express from "express";
 
 const passportSetup = require("@/config/database/passport-setup");
 const routerAuth = express.Router();
-const { protect, oauthProtect } = require("@/shared/middleware/auth");
+const { protect } = require("@/shared/middleware/auth");
 
 const {
   register,
@@ -24,9 +24,10 @@ const {
 routerAuth.post("/register", register);
 routerAuth.post("/login", login);
 routerAuth.get("/google", google);
-routerAuth.get("/google/redirect", googleCallback, oauthProtect, googleLogin);
+routerAuth.get("/google/redirect", googleCallback, googleLogin);
+// routerAuth.get("/google_login", googleLogin)
 routerAuth.post("/logout", logout);
-routerAuth.post("/me", protect, getMe);
+routerAuth.get("/me", protect, getMe);
 routerAuth.put("/update_details", protect, updateDetails);
 routerAuth.put("/avatar", protect, uploadChannelAvatar);
 routerAuth.put("/update_password", protect, updatePassword);

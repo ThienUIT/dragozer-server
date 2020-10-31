@@ -17,8 +17,6 @@ const UserSchema = new Schema(
     channelName: {
       type: String,
       required: [true, "Please add a channel name"],
-      unique: true,
-      uniqueCaseInsensitive: true,
     },
     email: {
       type: String,
@@ -38,10 +36,20 @@ const UserSchema = new Schema(
     },
     password: {
       type: String,
-      required: [true, "Please add a password"],
+      required: [
+        function () {
+          return UserSchema.provider != null;
+        },
+        "your account need password",
+      ],
       minlength: [8, "Must be eight characters long"],
       select: false,
       match: [ValidDataConst.VALID_PASSWORD, "Please add a valid password"],
+    },
+    provider: {
+      type: String,
+      enum: SchemaEnum.PROVIDER,
+      default: null,
     },
     resetPasswordToken: String,
     resetPasswordExpire: Date,

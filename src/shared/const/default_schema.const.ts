@@ -5,4 +5,5 @@ export class DefaultSchemaConst {
     "https://media.laodong.vn/Storage/NewsPortal/2019/12/25/774547/Ha-Lan-Mat-Biec2.jpg";
   static readonly PRIVACY_DRAFT = "draft";
   static readonly ROLE_USER = "user";
+  static readonly GOOGLE = "google";
 }

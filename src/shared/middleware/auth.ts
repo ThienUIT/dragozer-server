@@ -5,7 +5,6 @@ const jwt = require("jsonwebtoken");
 const asyncHandler = require("./async");
 const ErrorResponse = require("@/shared/utils/errorResponse");
 const User = require("@/models/User");
-const GoogleUser = require("@/models/GoogleUser");
 // protect route from away guest
 exports.protect = asyncHandler(
   async (req: UserRequest, res: Response, next: NextFunction) => {
@@ -25,27 +24,15 @@ exports.protect = asyncHandler(
 
     try {
       // Verify token
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      req.googleUser = await GoogleUser.findById(decoded.id).populate(
-        "subscribers"
-      );
+      const decoded = jwt.verify(token, process.env.TEXT_SECRET);
       // prototype.virtual subscribers count is
       req.user = await User.findById(decoded.id).populate("subscribers");
-      console.log("req.user", typeof req.user._id);
+      console.log("req.user", req.user._id);
       next();
     } catch (err) {
       return next(
         new ErrorResponse("Not authorized to access this route", 401)
       );
-    }
-  }
-);
-exports.oauthProtect = asyncHandler(
-  async (req: UserRequest, res: Response, next: NextFunction) => {
-    if (!req.user) {
-      res.redirect("/api/v1/auth/google");
-    } else {
-      next();
     }
   }
 );

@@ -9,7 +9,6 @@ const asyncHandler = require("@/shared/middleware/async");
 const ErrorResponse = require("@/shared/utils/errorResponse");
 const sendEmail = require("@/shared/utils/sendEmail");
 const User = require("@/models/User");
-const GoogleUser = require("@/models/GoogleUser");
 // @desc    Register user
 // @route   POST /api/v1/auth/register
 // @access  Public
@@ -63,17 +62,34 @@ exports.login = asyncHandler(
 //@route GET /api/v1/auth/google
 //@access  Public
 exports.google = passport.authenticate("google", {
-  scope: ["profile", "email"],
+  scope: ["profile", "email", "openid"],
 });
 //@desc Login Google api callback
 //@route POST /api/v1/auth/google/redirect
 //@access  Public
 exports.googleCallback = passport.authenticate("google", {
   failureRedirect: "/api/v1/auth/google",
+  session: false,
 });
 exports.googleLogin = asyncHandler(
-  (req: Request, res: Response, next: NextFunction) => {
-    res.status(200).json({ success: true, data: req.user });
+  async (req: UserRequest, res: Response, next: NextFunction) => {
+    //find or create
+    let currentUser = await User.findOne({
+      googleId: req.user.id,
+    });
+    if (!currentUser) {
+      currentUser = await User.create({
+        googleId: req.user.id,
+        channelName: req.user.displayName,
+        email: req.user._json.email,
+        photoUrl: req.user._json.picture,
+        provider: req.user.provider,
+      });
+      console.log("newUser::", currentUser.googleId);
+    }
+    console.log("currentUser::", currentUser.googleId);
+    sendTokenResponse(currentUser, 200, res);
+    // done(null, currentUser);
   }
 );
 
@@ -81,18 +97,18 @@ exports.googleLogin = asyncHandler(
 // @route   GET /api/v1/auth/logout
 // @access  Private
 exports.logout = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req: any, res: Response, next: NextFunction) => {
+    req.logout();
     res.cookie("token", "none", {
       expires: new Date(Date.now() + 10 * 1000),
       httpOnly: true,
     });
-    console.log("logout");
     res.status(200).json({ success: true, data: {} });
   }
 );
 
 // @desc    Get current logged in user
-// @route   POST /api/v1/auth/me
+// @route   GET /api/v1/auth/me
 // @access  Private
 exports.getMe = asyncHandler(
   async (req: UserRequest, res: Response, next: NextFunction) => {
