@@ -1,7 +1,6 @@
 import "module-alias/register";
 import { APP_PORT } from "@/config/database/config_env";
 
-const passport = require("passport");
 const colors = require("colors");
 const express = require("express");
 const logger = require("morgan");
@@ -60,9 +59,6 @@ app.use(
 
 // Prevent http param pollution
 app.use(hpp());
-
-// Initialize the passport object on every request
-app.use(passport.initialize());
 
 // error Handler
 app.use(errorHandler);

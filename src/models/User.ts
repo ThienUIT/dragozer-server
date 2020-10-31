@@ -16,9 +16,11 @@ const UserSchema = new Schema(
   {
     googleId: {
       type: String,
+      unique: true,
+      uniqueCaseInsensitive: true,
       required: [
         function () {
-          return UserSchema.provider == DefaultSchemaConst.GOOGLE;
+          return UserSchema.provider == "google";
         },
       ],
     },

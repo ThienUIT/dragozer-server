@@ -1,6 +1,5 @@
 import express from "express";
 
-const passportSetup = require("@/config/database/passport-setup");
 const routerAuth = express.Router();
 const { protect } = require("@/shared/middleware/auth");
 
@@ -8,8 +7,6 @@ const {
   register,
   login,
   google,
-  googleCallback,
-  googleLogin,
   logout,
   getMe,
   forgotPassword,
@@ -19,12 +16,9 @@ const {
   updatePassword,
 } = require("@/controllers/auth");
 
-//Google OAuth2.0
-
 routerAuth.post("/register", register);
 routerAuth.post("/login", login);
-routerAuth.get("/google", google);
-routerAuth.get("/google/redirect", googleCallback, googleLogin);
+routerAuth.post("/google", google);
 routerAuth.post("/logout", logout);
 routerAuth.get("/me", protect, getMe);
 routerAuth.put("/update_details", protect, updateDetails);
