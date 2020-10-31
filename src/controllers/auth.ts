@@ -19,9 +19,9 @@ exports.register = asyncHandler(
     email = email.toLowerCase();
 
     const user = await User.create({
-      channelName,
-      email,
-      password,
+      channelName: channelName,
+      email: email,
+      password: password,
     });
 
     sendTokenResponse(user, 200, res);
@@ -43,7 +43,8 @@ exports.login = asyncHandler(
 
     email = email.toLowerCase();
 
-    const user = await User.findOne({ email }).select("+password");
+    let user = await User.findOne({ email: email }).select("+password");
+    console.log(user);
 
     if (!user) {
       return next(new ErrorResponse("Invalid credentials", 400));
@@ -58,6 +59,7 @@ exports.login = asyncHandler(
     sendTokenResponse(user, 200, res);
   }
 );
+
 //@desc OAuth with google
 //@route GET /api/v1/auth/google
 //@access  Public
@@ -65,12 +67,15 @@ exports.google = passport.authenticate("google", {
   scope: ["profile", "email", "openid"],
 });
 //@desc Login Google api callback
-//@route POST /api/v1/auth/google/redirect
+//@route GET /api/v1/auth/google/redirect
 //@access  Public
 exports.googleCallback = passport.authenticate("google", {
   failureRedirect: "/api/v1/auth/google",
   session: false,
 });
+
+//@desc Find or Create
+//@access  Public
 exports.googleLogin = asyncHandler(
   async (req: UserRequest, res: Response, next: NextFunction) => {
     //find or create
@@ -85,14 +90,10 @@ exports.googleLogin = asyncHandler(
         photoUrl: req.user._json.picture,
         provider: req.user.provider,
       });
-      console.log("newUser::", currentUser.googleId);
     }
-    console.log("currentUser::", currentUser.googleId);
     sendTokenResponse(currentUser, 200, res);
-    // done(null, currentUser);
   }
 );
-
 // @desc    Log user out / clear cookie
 // @route   GET /api/v1/auth/logout
 // @access  Private
@@ -286,6 +287,7 @@ const sendTokenResponse = (
   res: Response
 ) => {
   const token = user.getSignedJwtToken();
+  console.log("TOKEN::", token);
   const options = {
     expires: new Date(Date.now() + COOKIE_EXPIRE * 24 * 60 * 60 * 1000),
     httpOnly: true,

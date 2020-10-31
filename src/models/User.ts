@@ -14,6 +14,14 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema(
   {
+    googleId: {
+      type: String,
+      required: [
+        function () {
+          return UserSchema.provider == DefaultSchemaConst.GOOGLE;
+        },
+      ],
+    },
     channelName: {
       type: String,
       required: [true, "Please add a channel name"],
@@ -40,7 +48,7 @@ const UserSchema = new Schema(
         function () {
           return UserSchema.provider != null;
         },
-        "your account need password",
+        "Your account need password",
       ],
       minlength: [8, "Must be eight characters long"],
       select: false,
@@ -91,7 +99,6 @@ UserSchema.pre("save", async function (next: HookNextFunction) {
   if (!currentUser.isModified("password")) {
     next();
   }
-
   const salt = await bcrypt.genSalt(10);
   currentUser.password = await bcrypt.hash(currentUser.password, salt);
 });

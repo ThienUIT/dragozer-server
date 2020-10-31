@@ -11,22 +11,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0b60fa34-fba7-404d-80ec-ebb3dfade6e4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env.development" beforeDir="false" afterPath="$PROJECT_DIR$/.env.development" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/database/config_env.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/database/config_env.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/database/passport-setup.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/database/passport-setup.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/request/user.requestt.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/request/user.requestt.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/body-parser/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/body-parser/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/database/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/database/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/auth.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/GoogleUser.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/GoogleUser.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/User.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/auth.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/videos.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/videos.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/const/default_schema.const.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/const/default_schema.const.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/enum/schema.enum.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/enum/schema.enum.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/middleware/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/middleware/auth.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,7 +153,7 @@
       <workItem from="1604036758978" duration="1201000" />
       <workItem from="1604040691928" duration="1497000" />
       <workItem from="1604048995666" duration="24489000" />
-      <workItem from="1604113794826" duration="13507000" />
+      <workItem from="1604113794826" duration="20330000" />
     </task>
     <servers />
   </component>
@@ -238,10 +229,10 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="100" y="127" width="1720" height="853" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1602865246773" />
-    <state x="217" y="314" width="618" height="522" key="find.popup" timestamp="1604127077595">
+    <state x="217" y="314" width="618" height="522" key="find.popup" timestamp="1604127617415">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="217" y="314" width="618" height="522" key="find.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1604127077595" />
+    <state x="217" y="314" width="618" height="522" key="find.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1604127617415" />
     <state x="269" y="155" width="1372" height="803" key="new project wizard" timestamp="1602783912259">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>

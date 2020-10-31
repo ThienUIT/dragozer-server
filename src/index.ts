@@ -1,12 +1,12 @@
 import "module-alias/register";
-import { APP_PORT, TEXT_SECRET } from "@/config/database/config_env";
+import { APP_PORT } from "@/config/database/config_env";
 
 const passport = require("passport");
 const colors = require("colors");
 const express = require("express");
-const morgan = require("morgan");
-const cookieSession = require("cookie-session");
+const logger = require("morgan");
 const cookieParser = require("cookie-parser");
+import bodyParser from "body-parser";
 const mongoSanitize = require("express-mongo-sanitize");
 const rateLimit = require("express-rate-limit");
 const fileUpload = require("express-fileupload");
@@ -21,11 +21,10 @@ const app = express();
 
 db.connect();
 // Instead of use body-parser, I use express
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-// console response
-app.use(morgan("dev"));
+app.use(logger("dev"));
 
 // File uploading
 app.use(
@@ -61,16 +60,9 @@ app.use(
 
 // Prevent http param pollution
 app.use(hpp());
-// cookieSession
-// app.use(
-//     cookieSession({
-//         maxAge: 24 * 60 * 60 * 1000,
-//         keys: [TEXT_SECRET, TEXT_SECRET],
-//     })
-// );
+
 // Initialize the passport object on every request
 app.use(passport.initialize());
-// app.use(passport.session());
 
 // error Handler
 app.use(errorHandler);
