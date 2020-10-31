@@ -16,13 +16,7 @@ const UserSchema = new Schema(
   {
     googleId: {
       type: String,
-      unique: true,
-      uniqueCaseInsensitive: true,
-      required: [
-        function () {
-          return UserSchema.provider == "google";
-        },
-      ],
+      default: "null",
     },
     channelName: {
       type: String,

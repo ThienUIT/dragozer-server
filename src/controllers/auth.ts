@@ -22,11 +22,12 @@ exports.register = asyncHandler(
     let { channelName, email, password } = req.body;
 
     email = email.toLowerCase();
-
+    const randomId = "_" + Math.random().toString(36).substr(2, 9);
     const user = await User.create({
       channelName: channelName,
       email: email,
       password: password,
+      googleId: `Local ${randomId}`,
     });
 
     sendTokenResponse(user, 200, res);
@@ -294,6 +295,7 @@ const sendTokenResponse = (
     options["secure"] = true;
   }
 
+  console.log("TOKEN::", token);
   res
     .status(statusCode)
     .cookie("token", token, options)
