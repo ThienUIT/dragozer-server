@@ -1,8 +1,13 @@
-import { NextFunction, Request, response, Response } from "express";
-import { COOKIE_EXPIRE, MAX_FILE_UPLOAD } from "@/config/database/config_env";
+import { NextFunction, Request, Response } from "express";
+import {
+  COOKIE_EXPIRE,
+  GOOGLE_CLIENT_ID,
+  MAX_FILE_UPLOAD,
+} from "@/config/database/config_env";
 import { UserRequest } from "@/config/request/user.requestt";
 
-const passport = require("passport");
+const { OAuth2Client } = require("google-auth-library");
+
 const crypto = require("crypto");
 const path = require("path");
 const asyncHandler = require("@/shared/middleware/async");
@@ -61,39 +66,31 @@ exports.login = asyncHandler(
 );
 
 //@desc OAuth with google
-//@route GET /api/v1/auth/google
+//@route POST /api/v1/auth/google
 //@access  Public
-exports.google = passport.authenticate("google", {
-  scope: ["profile", "email", "openid"],
-});
-//@desc Login Google api callback
-//@route GET /api/v1/auth/google/redirect
-//@access  Public
-exports.googleCallback = passport.authenticate("google", {
-  failureRedirect: "/api/v1/auth/google",
-  session: false,
-});
-
-//@desc Find or Create
-//@access  Public
-exports.googleLogin = asyncHandler(
-  async (req: UserRequest, res: Response, next: NextFunction) => {
-    //find or create
-    let currentUser = await User.findOne({
-      googleId: req.user.id,
+exports.google = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { token, provider } = req.body;
+    const client = new OAuth2Client(GOOGLE_CLIENT_ID);
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience: GOOGLE_CLIENT_ID,
     });
+    const payload = ticket.getPayload();
+    let currentUser = await User.findOne({ googleId: payload.sub });
     if (!currentUser) {
       currentUser = await User.create({
-        googleId: req.user.id,
-        channelName: req.user.displayName,
-        email: req.user._json.email,
-        photoUrl: req.user._json.picture,
-        provider: req.user.provider,
+        googleId: payload.sub,
+        channelName: payload.name,
+        email: payload.email,
+        photoUrl: payload.picture,
+        provider: provider,
       });
     }
     sendTokenResponse(currentUser, 200, res);
   }
 );
+
 // @desc    Log user out / clear cookie
 // @route   GET /api/v1/auth/logout
 // @access  Private
@@ -287,7 +284,6 @@ const sendTokenResponse = (
   res: Response
 ) => {
   const token = user.getSignedJwtToken();
-  console.log("TOKEN::", token);
   const options = {
     expires: new Date(Date.now() + COOKIE_EXPIRE * 24 * 60 * 60 * 1000),
     httpOnly: true,
