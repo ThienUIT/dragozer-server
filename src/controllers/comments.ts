@@ -3,6 +3,7 @@ import { UserRequest } from "@/config/request/user.requestt";
 
 const asyncHandler = require("@/shared/middleware/async");
 const ErrorResponse = require("@/shared/utils/errorResponse");
+const { success, errors } = require("@/shared/utils/responseApi");
 
 const Comment = require("@/models/Comment");
 const Video = require("@/models/Video");
@@ -12,7 +13,9 @@ const Video = require("@/models/Video");
 // @access  Private
 exports.getComments = asyncHandler(
   async (req: Request, res: any, next: NextFunction) => {
-    res.status(200).json(res.advancedResults);
+    res
+      .status(200)
+      .json(success("OK", { data: res.advancedResults }, res.statusCode));
   }
 );
 
@@ -27,14 +30,17 @@ exports.getCommentByVideoId = asyncHandler(
       .sort("-createdAt");
 
     if (!comments) {
-      return next(
-        new ErrorResponse(
-          `No comment with that video id of ${req.params.videoId}`
-        )
-      );
+      return res
+        .status(404)
+        .json(
+          errors(
+            `No comment with that video id of ${req.params.videoId}`,
+            res.statusCode
+          )
+        );
     }
 
-    res.status(200).json({ sucess: true, data: comments });
+    res.status(200).json(success("OK", { data: comments }, res.statusCode));
   }
 );
 
@@ -50,16 +56,20 @@ exports.createComment = asyncHandler(
     });
 
     if (!video) {
-      return next(
-        new ErrorResponse(`No video with id of ${req.body.videoId}`, 404)
-      );
+      return res
+        .status(404)
+        .json(
+          errors(`No video with id of ${req.body.videoId}`, res.statusCode)
+        );
     }
     const comment = await Comment.create({
       ...req.body,
       userId: req.user._id,
     });
 
-    return res.status(200).json({ sucess: true, data: comment });
+    return res
+      .status(200)
+      .json(success("OK", { data: comment }, res.statusCode));
   }
 );
 
@@ -71,9 +81,14 @@ exports.updateComment = asyncHandler(
     let comment = await Comment.findById(req.params.id).populate("videoId");
 
     if (!comment) {
-      return next(
-        new ErrorResponse(`No comment with id of ${req.params.id}`, 404)
-      );
+      return res
+        .status(404)
+        .json(
+          errors(
+            `No comment with that video id of ${req.params.id}`,
+            res.statusCode
+          )
+        );
     }
 
     if (
@@ -85,11 +100,16 @@ exports.updateComment = asyncHandler(
         runValidators: true,
       });
 
-      res.status(200).json({ success: true, data: comment });
+      res.status(200).json(success("OK", { data: comment }, res.statusCode));
     } else {
-      return next(
-        new ErrorResponse(`You are not authorized to update this comment`, 400)
-      );
+      return res
+        .status(400)
+        .json(
+          errors(
+            `You are not authorized to update this comment`,
+            res.statusCode
+          )
+        );
     }
   }
 );
@@ -102,9 +122,14 @@ exports.deleteComment = asyncHandler(
     let comment = await Comment.findById(req.params.id).populate("videoId");
 
     if (!comment) {
-      return next(
-        new ErrorResponse(`No comment with id of ${req.params.id}`, 404)
-      );
+      return res
+        .status(404)
+        .json(
+          errors(
+            `No comment with that video id of ${req.params.id}`,
+            res.statusCode
+          )
+        );
     }
 
     if (
@@ -113,11 +138,18 @@ exports.deleteComment = asyncHandler(
     ) {
       await comment.remove();
     } else {
-      return next(
-        new ErrorResponse(`You are not authorized to delete this comment`, 400)
-      );
+      return res
+        .status(400)
+        .json(
+          errors(
+            `You are not authorized to delete this comment`,
+            res.statusCode
+          )
+        );
     }
 
-    return res.status(200).json({ success: true, comment });
+    return res
+      .status(200)
+      .json(success("OK", { data: comment }, res.statusCode));
   }
 );

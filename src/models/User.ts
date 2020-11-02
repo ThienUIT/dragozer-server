@@ -57,6 +57,8 @@ const UserSchema = new Schema(
     },
     resetPasswordToken: String,
     resetPasswordExpire: Date,
+    registerToken: String,
+    registerExpire: Date,
   },
   { toJSON: { virtuals: true }, toObject: { virtuals: true }, timestamps: true }
 );
@@ -125,4 +127,16 @@ UserSchema.methods.getResetPasswordToken = function () {
   return resetToken;
 };
 
+UserSchema.methods.getRegisterToken = function () {
+  // Generate token
+  const token = crypto.randomBytes(20).toString("hex");
+
+  // Hash token and set to resetPasswordToken field
+  this.registerToken = crypto.createHash("sha256").update(token).digest("hex");
+
+  // Set expire
+  this.registerToken = 24 * 60 * 60 * 1000 * COOKIE_EXPIRE;
+
+  return token;
+};
 module.exports = mongoose.model("User", UserSchema);

@@ -3,6 +3,7 @@ import { UserRequest } from "@/config/request/user.requestt";
 
 const asyncHandler = require("@/shared/middleware/async");
 const ErrorResponse = require("@/shared/utils/errorResponse");
+const { success, errors } = require("@/shared/utils/responseApi");
 
 const advancedResultsFunc = require("@/shared/utils/advancedResultsFunc");
 
@@ -20,15 +21,20 @@ exports.createFeeling = asyncHandler(
     // check video
     const video = await Video.findById(videoId);
     if (!video) {
-      return next(new ErrorResponse(`No video with video id of ${videoId}`));
+      return res
+        .status(404)
+        .json(errors(`No video with video id of ${videoId}`, res.statusCode));
     }
 
     if (video.status !== "public") {
-      return next(
-        new ErrorResponse(
-          `You can't like/dislike this video until it's made pulbic`
-        )
-      );
+      return res
+        .status(400)
+        .json(
+          errors(
+            `You can't like/dislike this video until it's made pulbic`,
+            res.statusCode
+          )
+        );
     }
 
     // Check if feeling exists
@@ -44,18 +50,20 @@ exports.createFeeling = asyncHandler(
         videoId,
         userId,
       });
-      return res.status(200).json({ success: true, data: feeling });
+      return res
+        .status(200)
+        .json(success("OK", { data: feeling }, res.statusCode));
     }
     // else - check req.body.feeling if equals to feeling.type remove
     if (type == feeling.type) {
       await feeling.remove();
-      return res.status(200).json({ success: true, data: {} });
+      return res.status(200).json(success("OK", {}, res.statusCode));
     }
     // else - change feeling type
     feeling.type = type;
     feeling = await feeling.save();
 
-    res.status(200).json({ success: true, data: feeling });
+    res.status(200).json(success("OK", { data: feeling }, res.statusCode));
   }
 );
 
@@ -70,12 +78,12 @@ exports.checkFeeling = asyncHandler(
     });
 
     if (!feeling) {
-      return res.status(200).json({ success: true, data: { feeling: "" } });
+      return res.status(200).json(success("No feelings", {}, res.statusCode));
     }
 
     return res
       .status(200)
-      .json({ success: true, data: { feeling: feeling.type } });
+      .json(success("OK", { data: feeling.type }, res.statusCode));
   }
 );
 
@@ -90,7 +98,7 @@ exports.getLikedVideos = asyncHandler(
     });
 
     if (likes.length === 0)
-      return res.status(200).json({ success: true, data: {} });
+      return res.status(200).json(success("OK", {}, res.statusCode));
 
     const videosId = likes.map((video: any) => {
       return {

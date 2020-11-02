@@ -2,6 +2,7 @@ import { NextFunction, Response, Request } from "express";
 import colors from "colors";
 
 const { ErrorResponse } = require("@/shared/utils/errorResponse");
+const { errors } = require("@/shared/utils/responseApi");
 const errorHandler = (
   err: typeof ErrorResponse,
   req: Request,
@@ -47,6 +48,14 @@ const errorHandler = (
     success: false,
     error: error.messageWithField || error.message || "Server Error",
   });
+  res
+    .status(error.statusCode || 500)
+    .json(
+      errors(
+        error.messageWithField || error.message || " Server Error",
+        error.statusCode
+      )
+    );
 };
 
 module.exports = errorHandler;

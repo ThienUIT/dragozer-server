@@ -11,9 +11,10 @@ const { OAuth2Client } = require("google-auth-library");
 const crypto = require("crypto");
 const path = require("path");
 const asyncHandler = require("@/shared/middleware/async");
-const ErrorResponse = require("@/shared/utils/errorResponse");
+const { success, errors, validation } = require("@/shared/utils/responseApi");
 const sendEmail = require("@/shared/utils/sendEmail");
 const User = require("@/models/User");
+
 // @desc    Register user
 // @route   POST /api/v1/auth/register
 // @access  Public
@@ -23,14 +24,13 @@ exports.register = asyncHandler(
 
     email = email.toLowerCase();
     const randomId = "_" + Math.random().toString(36).substr(2, 9);
-    const user = await User.create({
+    await User.create({
       channelName: channelName,
       email: email,
       password: password,
-      googleId: `Local ${randomId}`,
+      googleId: `Local ${randomId}`, //TODO : WILL DELETE LATER BECAUSE THIS FIELD IS NOT NECESSARY THIS FIELD
     });
-
-    sendTokenResponse(user, 200, res);
+    res.status(200).json(success("Register success", {}, res.statusCode));
   }
 );
 
@@ -42,24 +42,26 @@ exports.login = asyncHandler(
     let { email, password } = req.body;
     console.log(email, password);
     if (!email || !password) {
-      return next(
-        new ErrorResponse("Please provide an email and password", 400)
-      );
+      return res
+        .status(400)
+        .json(errors("Please provide an email and password", res.statusCode));
     }
 
     email = email.toLowerCase();
 
     let user = await User.findOne({ email: email }).select("+password");
-    console.log(user);
-
     if (!user) {
-      return next(new ErrorResponse("Invalid credentials", 400));
+      return res
+        .status(400)
+        .json(errors("Invalid credentials", res.statusCode));
     }
 
     const isMatch = await user.matchPassword(password);
 
     if (!isMatch) {
-      return next(new ErrorResponse("Invalid credentials", 400));
+      return res
+        .status(422)
+        .json(validation("Invalid credentials", res.statusCode));
     }
 
     sendTokenResponse(user, 200, res);
@@ -97,12 +99,8 @@ exports.google = asyncHandler(
 // @access  Private
 exports.logout = asyncHandler(
   async (req: any, res: Response, next: NextFunction) => {
-    req.logout();
-    res.cookie("token", "none", {
-      expires: new Date(Date.now() + 10 * 1000),
-      httpOnly: true,
-    });
-    res.status(200).json({ success: true, data: {} });
+    res.clearCookie("token");
+    res.status(200).json(success("Logout", {}, res.statusCode));
   }
 );
 
@@ -112,8 +110,7 @@ exports.logout = asyncHandler(
 exports.getMe = asyncHandler(
   async (req: UserRequest, res: Response, next: NextFunction) => {
     const user = req.user;
-    console.log("get-me::", user);
-    res.status(200).json({ success: true, data: user });
+    res.status(200).json(success("OK", { data: user }, res.statusCode));
   }
 );
 
@@ -122,9 +119,10 @@ exports.getMe = asyncHandler(
 // @access  Private
 exports.updateDetails = asyncHandler(
   async (req: UserRequest, res: Response, next: NextFunction) => {
+    const { email, channelName } = req.body;
     const fieldsToUpdate = {
-      channelName: req.body.channelName,
-      email: req.body.email.toLowerCase(),
+      channelName: channelName,
+      email: email.toLowerCase(),
     };
     const user = await User.findByIdAndUpdate(req.user.id, fieldsToUpdate, {
       new: true,
@@ -132,7 +130,7 @@ exports.updateDetails = asyncHandler(
       context: "query",
     });
 
-    res.status(200).json({ success: true, data: user });
+    res.status(200).json(success("OK", { data: user }, res.statusCode));
   }
 );
 
@@ -142,22 +140,29 @@ exports.updateDetails = asyncHandler(
 exports.uploadChannelAvatar = asyncHandler(
   async (req: any, res: Response, next: NextFunction) => {
     if (!req.files) {
-      return next(new ErrorResponse(`Please upload a file`, 404));
+      return;
+      res.status(404).json(errors("Please upload a file", res.statusCode));
     }
 
     const file = req.files.avatar;
 
     if (!file.mimetype.startsWith("image")) {
-      return next(new ErrorResponse(`Please upload an image file`, 404));
+      return res
+        .status(404)
+        .json(errors("Please upload an image file", res.statusCode));
     }
 
     if (file.size > MAX_FILE_UPLOAD!) {
-      return next(
-        new ErrorResponse(
-          `Please upload an image less than ${MAX_FILE_UPLOAD / 1000 / 1000}mb`,
-          404
-        )
-      );
+      return res
+        .status(404)
+        .json(
+          errors(
+            `Please upload an image less than ${
+              MAX_FILE_UPLOAD / 1000 / 1000
+            }mb`,
+            res.statusCode
+          )
+        );
     }
 
     file.name = `avatar-${req.user._id}${path.parse(file.name).ext}`;
@@ -167,13 +172,17 @@ exports.uploadChannelAvatar = asyncHandler(
       async (err: Error) => {
         if (err) {
           console.error(err);
-          return next(new ErrorResponse(`Problem with file upload`, 500));
+          return res
+            .status(500)
+            .json(errors(`Problem with file upload`, res.statusCode));
         }
 
         // await Bootcamp.findByIdAndUpdate(req.params.id, { photo: file.name })
         req.user.photoUrl = file.name;
         await req.user.save();
-        res.status(200).json({ success: true, data: file.name });
+        res
+          .status(200)
+          .json(success("OK", { data: file.name }, res.statusCode));
       }
     );
   }
@@ -188,15 +197,9 @@ exports.updatePassword = asyncHandler(
 
     if (!(await user.matchPassword(req.body.currentPassword))) {
       // return next(new ErrorResponse('Password is incorrect', 401))
-      return res.status(400).json({
-        success: false,
-        error: [
-          {
-            field: "currentPassword",
-            message: "Current password is incorrect",
-          },
-        ],
-      });
+      return res
+        .status(400)
+        .json(errors("Password is incorrect", res.statusCode));
     }
 
     user.password = req.body.newPassword;
@@ -214,7 +217,9 @@ exports.forgotPassword = asyncHandler(
     const user = await User.findOne({ email: req.body.email.toLowerCase() });
 
     if (!user) {
-      return next(new ErrorResponse("There is no user with that email", 404));
+      return res
+        .status(404)
+        .json(errors("There is no user with that email", res.statusCode));
     }
 
     const resetToken = user.getResetPasswordToken();
@@ -227,13 +232,14 @@ exports.forgotPassword = asyncHandler(
 
     const message = `You are receiving this email because you (or someone else) has requested the reset of a password. Please make a PUT request to: \n\n ${resetUrl}`;
 
+    console.log(message);
     try {
       await sendEmail({
         email: user.email,
         subject: "Password reset token",
         message,
       });
-      res.status(200).json({ success: true, data: "Email sent" });
+      res.status(200).json(success("Check your email", {}, res.statusCode));
     } catch (err) {
       console.log(err);
       user.resetPasswordToken = undefined;
@@ -241,23 +247,22 @@ exports.forgotPassword = asyncHandler(
 
       await user.save({ validateBeforeSave: false });
 
-      return next(new ErrorResponse("Email could not be sent", 500));
+      return res.status(500).json(errors("Email could not be sent", 500));
     }
   }
 );
 
 // @desc    Reset password
-// @route   PUT /api/v1/auth/reset_password/:resettoken
+// @route   PUT /api/v1/auth/reset_password/:reset_token
 // @access  Public
 exports.resetPassword = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     // Get hashed token
     const resetPasswordToken = crypto
       .createHash("sha256")
-      .update(req.params.resettoken)
+      .update(req.params.reset_token)
       .digest("hex");
-
-    console.log(resetPasswordToken, "-", req.params.resettoken);
+    console.log(resetPasswordToken, "-", req.params.reset_token);
 
     const user = await User.findOne({
       resetPasswordToken,
@@ -265,7 +270,7 @@ exports.resetPassword = asyncHandler(
     });
 
     if (!user) {
-      return next(new ErrorResponse("Invalid token", 400));
+      return res.status(400).json(errors("Invalid token", res.statusCode));
     }
 
     // Set new password
@@ -299,5 +304,5 @@ const sendTokenResponse = (
   res
     .status(statusCode)
     .cookie("token", token, options)
-    .json({ success: true, token });
+    .json(success("Send Token", { data: token }, res.statusCode));
 };

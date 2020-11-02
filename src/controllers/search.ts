@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { UserRequest } from "@/config/request/user.requestt";
 
 const asyncHandler = require("@/shared/middleware/async");
+const { success, errors } = require("@/shared/utils/responseApi");
 
 const Video = require("@/models/Video");
 const User = require("@/models/User");
@@ -53,18 +54,17 @@ exports.search = asyncHandler(
     }
 
     if (parseInt(<string>req.query.limit) !== 0) {
-      res.status(200).json({
-        success: true,
-        count: search.length,
-        totalPage,
-        pagination,
-        data: search,
-      });
+      res
+        .status(200)
+        .json(
+          success(
+            "OK",
+            { count: search.length, totalPage, pagination, data: search },
+            res.statusCode
+          )
+        );
     } else {
-      res.status(200).json({
-        success: true,
-        data: search,
-      });
+      res.status(200).json(success("Search", { data: search }, res.statusCode));
     }
   }
 );

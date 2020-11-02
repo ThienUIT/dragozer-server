@@ -3,6 +3,7 @@ import { UserRequest } from "@/config/request/user.requestt";
 
 const asyncHandler = require("@/shared/middleware/async");
 const ErrorResponse = require("@/shared/utils/errorResponse");
+const { success, errors } = require("@/shared/utils/responseApi");
 
 const History = require("@/models/History");
 const Video = require("@/models/Video");
@@ -12,7 +13,9 @@ const Video = require("@/models/Video");
 // @access  Private
 exports.getHistories = asyncHandler(
   async (req: Request, res: any, next: NextFunction) => {
-    res.status(200).json(res.advancedResults);
+    res
+      .status(200)
+      .json(success("OK", { data: res.advancedResults }, res.statusCode));
   }
 );
 
@@ -24,9 +27,14 @@ exports.createHistory = asyncHandler(
     if (req.body.type == "watch") {
       const video = await Video.findById(req.body.videoId);
       if (!video) {
-        return next(
-          new ErrorResponse(`No video with that id of ${req.body.videoId}`)
-        );
+        return res
+          .status(404)
+          .json(
+            errors(
+              `No video with that id of ${req.body.videoId}`,
+              res.statusCode
+            )
+          );
       }
     }
     const history = await History.create({
@@ -34,7 +42,9 @@ exports.createHistory = asyncHandler(
       userId: req.user.id,
     });
 
-    return res.status(200).json({ sucess: true, data: history });
+    return res
+      .status(200)
+      .json(success("OK", { data: history }, res.statusCode));
   }
 );
 
@@ -49,14 +59,14 @@ exports.deleteHistory = asyncHandler(
     });
 
     if (!history) {
-      return next(
-        new ErrorResponse(`No history with id of ${req.params.id}`, 404)
-      );
+      return res
+        .status(404)
+        .json(errors(`No history with id of ${req.params.id}`, res.statusCode));
     }
 
     await history.remove();
 
-    return res.status(200).json({ success: true, data: {} });
+    return res.status(200).json(success("Delete success", {}, res.statusCode));
   }
 );
 
@@ -70,6 +80,6 @@ exports.deleteHistories = asyncHandler(
       userId: req.user._id,
     });
 
-    return res.status(200).json({ success: true, data: {} });
+    return res.status(200).json(success("Delete success", {}, res.statusCode));
   }
 );

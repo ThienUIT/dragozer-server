@@ -2,6 +2,8 @@ import { NextFunction, Request, Response } from "express";
 import { MAX_FILE_UPLOAD } from "@/config/database/config_env";
 import { UserRequest } from "@/config/request/user.requestt";
 
+const { success, errors } = require("@/shared/utils/responseApi");
+
 const path = require("path");
 const fs = require("fs");
 const asyncHandler = require("@/shared/middleware/async");
@@ -15,7 +17,10 @@ const Video = require("../models/Video");
 exports.getVideos = asyncHandler(
   async (req: Request, res: any, next: NextFunction) => {
     console.log("getvideos::", req);
-    res.status(200).json(res.advancedResults);
+
+    res
+      .status(200)
+      .json(success("OK", { data: res.advancedResults }, res.statusCode));
   }
 );
 
@@ -33,12 +38,14 @@ exports.getVideo = asyncHandler(
       .populate({ path: "dislikes" })
       .populate({ path: "comments" });
     if (!video) {
-      return next(
-        new ErrorResponse(`No video with that id of ${req.params.id}`)
-      );
+      return res
+        .status(404)
+        .json(
+          errors(`No video with that id of ${req.params.id}`, res.statusCode)
+        );
     }
 
-    res.status(200).json({ sucess: true, data: video });
+    res.status(200).json(success("OK", { data: video }, res.statusCode));
   }
 );
 
@@ -50,26 +57,32 @@ exports.videoUpload = asyncHandler(
     let videoModel = await Video.create({ userId: req.user._id });
 
     if (!req.files) {
-      return next(new ErrorResponse(`Please upload a video`, 404));
+      return res
+        .status(404)
+        .json(errors(`Please upload a video`, res.statusCode));
     }
 
     const video = req.files.video;
 
     if (!video.mimetype.startsWith("video")) {
       await videoModel.remove();
-      return next(new ErrorResponse(`Please upload a video`, 404));
+      return res
+        .status(404)
+        .json(errors(`Please upload a video`, res.statusCode));
     }
     console.log(video.size, MAX_FILE_UPLOAD * 5);
     if (video.size > MAX_FILE_UPLOAD * 5) {
       await videoModel.remove();
-      return next(
-        new ErrorResponse(
-          `Please upload a video less than ${
-            (MAX_FILE_UPLOAD * 5) / 1000 / 1000
-          }mb`,
-          404
-        )
-      );
+      return res
+        .status(404)
+        .json(
+          errors(
+            `Please upload a video less than ${
+              (MAX_FILE_UPLOAD * 5) / 1000 / 1000
+            }mb`,
+            res.statusCode
+          )
+        );
     }
     video.originalName = video.name.split(".")[0];
     video.name = `video-${videoModel._id}${path.parse(video.name).ext}`;
@@ -80,7 +93,9 @@ exports.videoUpload = asyncHandler(
         if (err) {
           await videoModel.remove();
           console.error(err);
-          return next(new ErrorResponse(`Problem with video upload`, 500));
+          return res
+            .status(500)
+            .json(errors(`Problem with video upload`, res.statusCode));
         }
 
         videoModel = await Video.findByIdAndUpdate(
@@ -92,7 +107,9 @@ exports.videoUpload = asyncHandler(
           { new: true, runValidators: true }
         );
 
-        res.status(200).json({ success: true, data: videoModel });
+        res
+          .status(200)
+          .json(success("OK", { data: videoModel }, res.statusCode));
       }
     );
   }
@@ -109,11 +126,13 @@ exports.updateVideo = asyncHandler(
     });
 
     if (!video)
-      return next(
-        new ErrorResponse(`No video with that id of ${req.params.id}`)
-      );
+      return res
+        .status(404)
+        .json(
+          errors(`No video with that id of ${req.params.id}`, res.statusCode)
+        );
 
-    res.status(200).json({ success: true, data: video });
+    res.status(200).json(success("OK", { data: video }, res.statusCode));
   }
 );
 
@@ -125,15 +144,16 @@ exports.updateViews = asyncHandler(
     let video = await Video.findById(req.params.id);
 
     if (!video)
-      return next(
-        new ErrorResponse(`No video with that id of ${req.params.id}`)
-      );
-
+      return res
+        .status(404)
+        .json(
+          errors(`No video with that id of ${req.params.id}`, res.statusCode)
+        );
     video.views++;
 
     await video.save();
 
-    res.status(200).json({ success: true, data: video });
+    res.status(200).json(success("OK", { data: video }, res.statusCode));
   }
 );
 
@@ -144,27 +164,35 @@ exports.uploadVideoThumbnail = asyncHandler(
   async (req: any, res: Response, next: NextFunction) => {
     const video = await Video.findById(req.params.id);
     if (!video)
-      return next(
-        new ErrorResponse(`No video with id of ${req.params.id}`, 404)
-      );
+      return res
+        .status(404)
+        .json(
+          errors(`No video with that id of ${req.params.id}`, res.statusCode)
+        );
 
     if (!req.files) {
-      return next(new ErrorResponse(`Please upload a file`, 404));
+      return res.status(404).json(errors(`Please upload file`, res.statusCode));
     }
 
     const file = req.files.thumbnail;
 
     if (!file.mimetype.startsWith("image")) {
-      return next(new ErrorResponse(`Please upload an image file`, 404));
+      return res
+        .status(404)
+        .json(errors(`Please update an image file`, res.statusCode));
     }
 
     if (file.size > MAX_FILE_UPLOAD) {
-      return next(
-        new ErrorResponse(
-          `Please upload an image less than ${MAX_FILE_UPLOAD / 1000 / 1000}mb`,
-          404
-        )
-      );
+      return res
+        .status(404)
+        .json(
+          errors(
+            `Please upload an image less than ${
+              MAX_FILE_UPLOAD / 1000 / 1000
+            }mb`,
+            res.statusCode
+          )
+        );
     }
 
     file.name = `thumbnail-${video._id}${path.parse(file.name).ext}`;
@@ -174,14 +202,18 @@ exports.uploadVideoThumbnail = asyncHandler(
       async (err: Error) => {
         if (err) {
           console.error(err);
-          return next(new ErrorResponse(`Problem with file upload`, 500));
+          return res
+            .status(500)
+            .json(errors(`Problem with file upload`, res.statusCode));
         }
 
         await Video.findByIdAndUpdate(req.params.id, {
           thumbnailUrl: file.name,
         });
 
-        res.status(200).json({ success: true, data: file.name });
+        res
+          .status(200)
+          .json(success("OK", { data: file.name }, res.statusCode));
       }
     );
   }
@@ -198,21 +230,25 @@ exports.deleteVideo = asyncHandler(
     });
 
     if (!video) {
-      return next(
-        new ErrorResponse(`No video with id of ${req.params.id}`, 404)
-      );
+      return res
+        .status(404)
+        .json(
+          errors(`No video with that id of ${req.params.id}`, res.statusCode)
+        );
     }
 
     fs.unlink(
       `${process.env.FILE_UPLOAD_PATH}/videos/${video.url}`,
       async (err: Error) => {
         if (err) {
-          return next(
-            new ErrorResponse(
-              `Something went wrong, couldn't delete video photo`,
-              500
-            )
-          );
+          return res
+            .status(500)
+            .json(
+              errors(
+                `Something went wrong, couldn't delete video photo`,
+                res.statusCode
+              )
+            );
         }
         fs.unlink(
           `${process.env.FILE_UPLOAD_PATH}/thumbnails/${video.thumbnailUrl}`,
@@ -226,7 +262,9 @@ exports.deleteVideo = asyncHandler(
             //   )
             // }
             await video.remove();
-            return res.status(200).json({ success: true, video });
+            res
+              .status(200)
+              .json(success("OK", { data: video }, res.statusCode));
           }
         );
       }

@@ -1,8 +1,10 @@
 import { NextFunction, Request, Response } from "express";
 import { UserRequest } from "@/config/request/user.requestt";
+
 const asyncHandler = require("@/shared/middleware/async");
 const ErrorResponse = require("@/shared/utils/errorResponse");
 const advancedResultsFunc = require("@/shared/utils/advancedResultsFunc");
+const { success, errors } = require("@/shared/utils/responseApi");
 
 const Video = require("@/models/Video");
 const Subscription = require("@/models/Subscription");
@@ -12,7 +14,9 @@ const Subscription = require("@/models/Subscription");
 // @access  Private
 exports.getSubscribers = asyncHandler(
   async (req: Request, res: any, next: NextFunction) => {
-    res.status(200).json(res.advancedResults);
+    res
+      .status(200)
+      .json(success("OK", { data: res.advancedResults }, res.statusCode));
   }
 );
 
@@ -21,7 +25,9 @@ exports.getSubscribers = asyncHandler(
 // @access  Private
 exports.getChannels = asyncHandler(
   async (req: Request, res: any, next: NextFunction) => {
-    res.status(200).json(res.advancedResults);
+    res
+      .status(200)
+      .json(success("OK", { data: res.advancedResults }, res.statusCode));
   }
 );
 
@@ -36,10 +42,14 @@ exports.checkSubscription = asyncHandler(
     });
 
     if (!channel) {
-      return res.status(200).json({ success: true, data: {} });
+      return res
+        .status(404)
+        .json(errors("You are not have channel", res.statusCode));
     }
 
-    return res.status(200).json({ success: true, data: channel });
+    return res
+      .status(200)
+      .json(success("OK", { data: channel }, res.statusCode));
   }
 );
 
@@ -51,7 +61,11 @@ exports.createSubscriber = asyncHandler(
     const { channelId } = req.body;
 
     if (channelId.toString() == req.user._id.toString()) {
-      return next(new ErrorResponse(`You can't subscribe to your own channle`));
+      return res
+        .status(400)
+        .json(
+          errors(`You can't subscribe to your own channel`, res.statusCode)
+        );
     }
 
     let subscription = await Subscription.findOne({
@@ -61,7 +75,7 @@ exports.createSubscriber = asyncHandler(
 
     if (subscription) {
       await subscription.remove();
-      return res.status(200).json({ success: true, data: {} });
+      return res.status(200).json(success("OK", {}, res.statusCode));
     } else {
       subscription = await Subscription.create({
         subscriberId: req.user._id,
@@ -69,7 +83,7 @@ exports.createSubscriber = asyncHandler(
       });
     }
 
-    res.status(200).json({ success: true, data: subscription });
+    res.status(200).json(success("OK", { data: subscription }, res.statusCode));
   }
 );
 
@@ -83,7 +97,7 @@ exports.getSubscribedVideos = asyncHandler(
     });
 
     if (channels.length === 0)
-      return res.status(200).json({ success: true, data: {} });
+      return res.status(200).json(success("OK", {}, res.statusCode));
 
     const channelsId = channels.map((channel: any) => {
       return {

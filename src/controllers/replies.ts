@@ -4,6 +4,7 @@ import { ResultsResponse } from "@/config/response/advance_results.response";
 
 const asyncHandler = require("@/shared/middleware/async");
 const ErrorResponse = require("@/shared/utils/errorResponse");
+const { success, errors } = require("@/shared/utils/responseApi");
 
 const Comment = require("@/models/Comment");
 const Reply = require("@/models/Reply");
@@ -13,7 +14,9 @@ const Reply = require("@/models/Reply");
 // @access  Public
 exports.getReplies = asyncHandler(
   async (req: Request, res: ResultsResponse, next: NextFunction) => {
-    res.status(200).json(res.advancedResults);
+    res
+      .status(200)
+      .json(success("OK", { data: res.advancedResults }, res.statusCode));
   }
 );
 
@@ -27,16 +30,18 @@ exports.createReply = asyncHandler(
     });
 
     if (!comment) {
-      return next(
-        new ErrorResponse(`No comment with id of ${req.body.commentId}`, 404)
-      );
+      return res
+        .status(404)
+        .json(
+          errors(`No comment with id of ${req.body.commentId}`, res.statusCode)
+        );
     }
     const reply = await Reply.create({
       ...req.body,
       userId: req.user._id,
     });
 
-    return res.status(200).json({ success: true, data: reply });
+    return res.status(200).json(success("OK", { data: reply }, res.statusCode));
   }
 );
 
@@ -52,9 +57,9 @@ exports.updateReply = asyncHandler(
     });
 
     if (!reply) {
-      return next(
-        new ErrorResponse(`No reply with id of ${req.params.id}`, 404)
-      );
+      return res
+        .status(404)
+        .json(errors(`No reply with id of ${req.params.id}`, res.statusCode));
     }
 
     if (
@@ -66,11 +71,13 @@ exports.updateReply = asyncHandler(
         runValidators: true,
       });
 
-      res.status(200).json({ success: true, data: reply });
+      res.status(200).json(success("OK", { data: reply }, res.statusCode));
     } else {
-      return next(
-        new ErrorResponse(`You are not authorized to update this reply`, 400)
-      );
+      return res
+        .status(400)
+        .json(
+          errors(`You are not authorized to update this reply`, res.statusCode)
+        );
     }
   }
 );
@@ -87,9 +94,9 @@ exports.deleteReply = asyncHandler(
     });
 
     if (!reply) {
-      return next(
-        new ErrorResponse(`No reply with id of ${req.params.id}`, 404)
-      );
+      return res
+        .status(404)
+        .json(errors(`No reply with id of ${req.params.id}`, res.statusCode));
     }
 
     if (
@@ -98,11 +105,13 @@ exports.deleteReply = asyncHandler(
     ) {
       await reply.remove();
     } else {
-      return next(
-        new ErrorResponse(`You are not authorized to delete this reply`, 400)
-      );
+      return res
+        .status(400)
+        .json(
+          errors(`You are not authorized to delete this reply`, res.statusCode)
+        );
     }
 
-    return res.status(200).json({ success: true, reply });
+    return res.status(200).json(success("OK", { data: reply }, res.statusCode));
   }
 );

@@ -1,6 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { UserRequest } from "@/config/request/user.requestt";
 
+const { success, errors } = require("@/shared/utils/responseApi");
+
 const asyncHandler = require("@/shared/middleware/async");
 const ErrorResponse = require("@/shared/utils/errorResponse");
 const Category = require("@/models/Category");
@@ -10,7 +12,9 @@ const Category = require("@/models/Category");
 // @access  Private/Admin
 exports.getCategories = asyncHandler(
   async (req: Request, res: any, next: NextFunction) => {
-    res.status(200).json(res.advancedResults);
+    res
+      .status(200)
+      .json(success("OK", { data: res.advancedResults }, res.statusCode));
   }
 );
 
@@ -22,12 +26,14 @@ exports.getCategory = asyncHandler(
     const category = await Category.findById(req.params.id);
 
     if (!category) {
-      return next(
-        new ErrorResponse(`No category with that id of ${req.params.id}`)
-      );
+      return res
+        .status(404)
+        .json(
+          errors(`No category with that id of ${req.params.id}`, res.statusCode)
+        );
     }
 
-    res.status(200).json({ success: true, data: category });
+    res.status(200).json(success("OK", { data: category }, res.statusCode));
   }
 );
 
@@ -41,7 +47,9 @@ exports.createCategory = asyncHandler(
       userId: req.user.id,
     });
 
-    return res.status(200).json({ sucess: true, data: category });
+    return res
+      .status(200)
+      .json(success("OK", { data: category }, res.statusCode));
   }
 );
 
@@ -56,12 +64,17 @@ exports.updateCategory = asyncHandler(
       context: "query",
     });
 
-    if (!category)
-      return next(
-        new ErrorResponse(`No category with that id of ${req.params.id}`)
-      );
+    if (!category) {
+      return res
+        .status(404)
+        .json(
+          errors(`No category with that id of ${req.params.id}`, res.statusCode)
+        );
+    }
 
-    res.status(200).json({ success: true, data: category });
+    return res
+      .status(200)
+      .json(success("Update success", { data: category }, res.statusCode));
   }
 );
 
@@ -73,13 +86,15 @@ exports.deleteCategory = asyncHandler(
     let category = await Category.findById(req.params.id);
 
     if (!category) {
-      return next(
-        new ErrorResponse(`No category with id of ${req.params.id}`, 404)
-      );
+      return res
+        .status(404)
+        .json(
+          errors(`No category with that id of ${req.params.id}`, res.statusCode)
+        );
     }
 
     await category.remove();
 
-    return res.status(200).json({ success: true, category });
+    return res.status(200).json(success("Delete success", {}, res.statusCode));
   }
 );
