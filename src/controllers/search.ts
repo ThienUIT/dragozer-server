@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { UserRequest } from "@/config/request/user.requestt";
 
 const asyncHandler = require("@/shared/middleware/async");
-const { success, errors } = require("@/shared/utils/responseApi");
+const { success } = require("@/shared/utils/responseApi");
 
 const Video = require("@/models/Video");
 const User = require("@/models/User");

@@ -4,7 +4,6 @@ import { ResultsResponse } from "@/config/response/advance_results.response";
 const { success, errors } = require("@/shared/utils/responseApi");
 
 const asyncHandler = require("@/shared/middleware/async");
-const ErrorResponse = require("@/shared/utils/errorResponse");
 
 const User = require("@/models/User");
 

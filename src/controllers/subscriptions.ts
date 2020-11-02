@@ -2,7 +2,6 @@ import { NextFunction, Request, Response } from "express";
 import { UserRequest } from "@/config/request/user.requestt";
 
 const asyncHandler = require("@/shared/middleware/async");
-const ErrorResponse = require("@/shared/utils/errorResponse");
 const advancedResultsFunc = require("@/shared/utils/advancedResultsFunc");
 const { success, errors } = require("@/shared/utils/responseApi");
 

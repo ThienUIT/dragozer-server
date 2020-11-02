@@ -4,7 +4,6 @@ import { UserRequest } from "@/config/request/user.requestt";
 const { success, errors } = require("@/shared/utils/responseApi");
 
 const asyncHandler = require("@/shared/middleware/async");
-const ErrorResponse = require("@/shared/utils/errorResponse");
 const Category = require("@/models/Category");
 
 // @desc    Get categories
