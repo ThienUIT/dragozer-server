@@ -11,22 +11,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0b60fa34-fba7-404d-80ec-ebb3dfade6e4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/shared/utils/responseApi.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/avatars/avatar-5fa5295860f9f640b17ece72.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/auth.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/categories.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/categories.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/comments.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/comments.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/feelings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/feelings.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/histories.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/histories.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/replies.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/replies.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/search.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/search.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/subscriptions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/subscriptions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/users.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/users.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/videos.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/videos.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/User.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/auth.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/const/valid_data_const.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/const/valid_data_const.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/middleware/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/middleware/auth.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/shared/middleware/errorHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/middleware/errorHandler.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,7 +45,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/oad/hotel-management-backend" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../web" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -171,7 +160,29 @@
       <workItem from="1604245023194" duration="5000" />
       <workItem from="1604245078564" duration="42000" />
       <workItem from="1604246720252" duration="2184000" />
-      <workItem from="1604285350122" duration="5063000" />
+      <workItem from="1604285350122" duration="5195000" />
+      <workItem from="1604299715501" duration="2663000" />
+      <workItem from="1604329462948" duration="2156000" />
+      <workItem from="1604398705400" duration="4457000" />
+      <workItem from="1604404273564" duration="1742000" />
+      <workItem from="1604458419834" duration="46000" />
+      <workItem from="1604458474276" duration="9737000" />
+      <workItem from="1604544785821" duration="2786000" />
+      <workItem from="1604557828223" duration="1078000" />
+      <workItem from="1604562375042" duration="2038000" />
+      <workItem from="1604586545085" duration="1207000" />
+      <workItem from="1604630264638" duration="4789000" />
+      <workItem from="1604652879732" duration="6144000" />
+      <workItem from="1604713610227" duration="1779000" />
+      <workItem from="1604740062921" duration="602000" />
+      <workItem from="1604755778844" duration="1920000" />
+      <workItem from="1604806101058" duration="623000" />
+      <workItem from="1604835418847" duration="632000" />
+      <workItem from="1604838303341" duration="3878000" />
+      <workItem from="1604886324637" duration="1808000" />
+      <workItem from="1604923152465" duration="1371000" />
+      <workItem from="1604975975795" duration="4043000" />
+      <workItem from="1605006736914" duration="4095000" />
     </task>
     <servers />
   </component>
@@ -210,10 +221,10 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="768" y="272" width="374" height="569" key="#com.intellij.ide.util.MemberChooser/0.27.1920.1053@0.27.1920.1053" timestamp="1603217398993" />
-    <state x="743" y="311" width="424" height="491" key="FileChooserDialogImpl" timestamp="1604242247459">
+    <state x="743" y="311" width="424" height="491" key="FileChooserDialogImpl" timestamp="1604835449796">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="743" y="311" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1604242247459" />
+    <state x="743" y="311" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1604835449796" />
     <state width="1874" height="275" key="GridCell.Tab.0.bottom" timestamp="1603804780798">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -242,10 +253,10 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="100" y="127" width="1720" height="853" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1602865246773" />
-    <state x="217" y="314" width="618" height="522" key="find.popup" timestamp="1604287390298">
+    <state x="217" y="314" width="618" height="522" key="find.popup" timestamp="1605013477063">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="217" y="314" width="618" height="522" key="find.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1604287390298" />
+    <state x="217" y="314" width="618" height="522" key="find.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1605013477063" />
     <state x="269" y="155" width="1372" height="803" key="new project wizard" timestamp="1602783912259">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
