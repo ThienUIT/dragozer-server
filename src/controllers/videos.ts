@@ -15,11 +15,7 @@ const Video = require("../models/Video");
 // @access  Public Or Private
 exports.getVideos = asyncHandler(
   async (req: Request, res: any, next: NextFunction) => {
-    console.log("getvideos::", req);
-
-    res
-      .status(200)
-      .json(success("OK", { data: res.advancedResults }, res.statusCode));
+    res.status(200).json(res.advancedResults);
   }
 );
 
@@ -49,71 +45,31 @@ exports.getVideo = asyncHandler(
 );
 
 // @desc    Upload video
-// @route   PUT /api/v1/video
+// @route   POST /api/v1/videos
 // @access  Private
 exports.videoUpload = asyncHandler(
-  async (req: any, res: Response, next: NextFunction) => {
-    let videoModel = await Video.create({ userId: req.user._id });
-
-    if (!req.files) {
-      return res
-        .status(404)
-        .json(errors(`Please upload a video`, res.statusCode));
-    }
-
-    const video = req.files.video;
-
-    if (!video.mimetype.startsWith("video")) {
-      await videoModel.remove();
-      return res
-        .status(404)
-        .json(errors(`Please upload a video`, res.statusCode));
-    }
-    console.log(video.size, MAX_FILE_UPLOAD * 5);
-    if (video.size > MAX_FILE_UPLOAD * 5) {
-      await videoModel.remove();
-      return res
-        .status(404)
-        .json(
-          errors(
-            `Please upload a video less than ${
-              (MAX_FILE_UPLOAD * 5) / 1000 / 1000
-            }mb`,
-            res.statusCode
-          )
-        );
-    }
-    video.originalName = video.name.split(".")[0];
-    video.name = `video-${videoModel._id}${path.parse(video.name).ext}`;
-
-    video.mv(
-      `${process.env.FILE_UPLOAD_PATH}/videos/${video.name}`,
-      async (err: Error) => {
-        if (err) {
-          await videoModel.remove();
-          console.error(err);
-          return res
-            .status(500)
-            .json(errors(`Problem with video upload`, res.statusCode));
-        }
-
-        videoModel = await Video.findByIdAndUpdate(
-          videoModel._id,
-          {
-            url: video.name,
-            title: video.originalName,
-          },
-          { new: true, runValidators: true }
-        );
-
-        res
-          .status(200)
-          .json(success("OK", { data: videoModel }, res.statusCode));
-      }
-    );
+  async (req: UserRequest, res: Response, next: NextFunction) => {
+    const { id } = req.user;
+    const {
+      title,
+      description,
+      status,
+      category,
+      url,
+      thumbnailUrl,
+    } = req.body;
+    await Video.create({
+      userId: id,
+      thumbnailUrl: thumbnailUrl,
+      title: title,
+      description: description,
+      categoryId: category,
+      status: status,
+      url: url,
+    });
+    return res.status(200).json(success("Ok", {}, res.statusCode));
   }
 );
-
 // @desc    Update video
 // @route   PUT /api/v1/videos/:id
 // @access  Private

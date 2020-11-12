@@ -1,6 +1,6 @@
 // @eg      channelName=reagan&select=email&sort=-channelName,email
 
-import { NextFunction, Response } from "express";
+import { NextFunction } from "express";
 import { PaginationResponse } from "@/config/response/pagination.response";
 import { UserRequest } from "@/config/request/user.requestt";
 import { ResultsResponse } from "@/config/response/advance_results.response";
@@ -12,7 +12,7 @@ const advancedResults = (
 ) => async (req: UserRequest, res: ResultsResponse, next: NextFunction) => {
   if (visibility.status == "private") {
     req.query.userId = req["user"];
-
+    console.log("advanced Results::", req.query.userId);
     if (visibility.filter == "channel") {
       req.query.channelId = req.user._id;
       delete req.query.userId;
@@ -22,9 +22,10 @@ const advancedResults = (
   }
 
   const reqQuery = { ...req.query };
+  console.log("advanced Results::", reqQuery);
 
   const removeFields = ["select", "sort", "page", "limit"];
-  removeFields.forEach((param) => delete reqQuery[param]);
+  removeFields.forEach((param: string) => delete reqQuery[param]);
 
   let queryStr = JSON.stringify(reqQuery);
   queryStr = queryStr.replace(
