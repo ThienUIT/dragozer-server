@@ -11,7 +11,7 @@ const { OAuth2Client } = require("google-auth-library");
 const crypto = require("crypto");
 const path = require("path");
 const asyncHandler = require("@/shared/middleware/async");
-const { success, errors, validation } = require("@/shared/utils/responseApi");
+const { success, errors } = require("@/shared/utils/responseApi");
 const sendEmail = require("@/shared/utils/sendEmail");
 const User = require("@/models/User");
 
@@ -53,17 +53,18 @@ exports.login = asyncHandler(
     if (!user) {
       return res
         .status(400)
-        .json(errors("Invalid credentials", res.statusCode));
+        .json(errors("Your email is not exists", res.statusCode));
     }
 
     const isMatch = await user.matchPassword(password);
 
     if (!isMatch) {
       return res
-        .status(422)
-        .json(validation("Invalid credentials", res.statusCode));
+        .status(400)
+        .json(
+          errors("Your email or password wrong, try again", res.statusCode)
+        );
     }
-
     sendTokenResponse(user, 200, res);
   }
 );
@@ -120,6 +121,7 @@ exports.getMe = asyncHandler(
 exports.updateDetails = asyncHandler(
   async (req: UserRequest, res: Response, next: NextFunction) => {
     const { email, channelName } = req.body;
+    console.log("email::channel", req.body);
     const fieldsToUpdate = {
       channelName: channelName,
       email: email.toLowerCase(),
@@ -130,61 +132,33 @@ exports.updateDetails = asyncHandler(
       context: "query",
     });
 
-    res.status(200).json(success("OK", { data: user }, res.statusCode));
+    res
+      .status(200)
+      .json(success("User is updated ", { data: user }, res.statusCode));
   }
 );
 
 // @desc    Upload avatar
-// @route   PUT /api/v1/users
+// @route   PUT /api/v1/avatar
 // @access  Private
 exports.uploadChannelAvatar = asyncHandler(
-  async (req: any, res: Response, next: NextFunction) => {
-    if (!req.files) {
-      return;
-      res.status(404).json(errors("Please upload a file", res.statusCode));
-    }
-
-    const file = req.files.avatar;
-
-    if (!file.mimetype.startsWith("image")) {
+  async (req: UserRequest, res: Response, next: NextFunction) => {
+    const { avatar } = req.body;
+    if (!avatar) {
       return res
-        .status(404)
-        .json(errors("Please upload an image file", res.statusCode));
+        .status(400)
+        .json(errors("Need avatar to changed", res.statusCode));
     }
-
-    if (file.size > MAX_FILE_UPLOAD!) {
-      return res
-        .status(404)
-        .json(
-          errors(
-            `Please upload an image less than ${
-              MAX_FILE_UPLOAD / 1000 / 1000
-            }mb`,
-            res.statusCode
-          )
-        );
-    }
-
-    file.name = `avatar-${req.user._id}${path.parse(file.name).ext}`;
-
-    file.mv(
-      `${process.env.FILE_UPLOAD_PATH}/avatars/${file.name}`,
-      async (err: Error) => {
-        if (err) {
-          console.error(err);
-          return res
-            .status(500)
-            .json(errors(`Problem with file upload`, res.statusCode));
-        }
-
-        // await Bootcamp.findByIdAndUpdate(req.params.id, { photo: file.name })
-        req.user.photoUrl = file.name;
-        await req.user.save();
-        res
-          .status(200)
-          .json(success("OK", { data: file.name }, res.statusCode));
-      }
-    );
+    const fieldsToUpdate = {
+      photoUrl: avatar,
+    };
+    const user = await User.findByIdAndUpdate(req.user.id, fieldsToUpdate, {
+      new: true,
+      runValidators: true,
+    });
+    return res
+      .status(200)
+      .json(success("User is updated ", { data: user }, res.statusCode));
   }
 );
 
@@ -196,9 +170,8 @@ exports.updatePassword = asyncHandler(
     const user = await User.findById(req.user.id).select("+password");
 
     if (!(await user.matchPassword(req.body.currentPassword))) {
-      // return next(new ErrorResponse('Password is incorrect', 401))
       return res
-        .status(400)
+        .status(401)
         .json(errors("Password is incorrect", res.statusCode));
     }
 
@@ -226,11 +199,9 @@ exports.forgotPassword = asyncHandler(
 
     await user.save({ validateBeforeSave: false });
 
-    const resetUrl = `${req.protocol}://${req.get(
-      "host"
-    )}/api/v1/auth/reset_password/${resetToken}`;
+    const resetUrl = `http://localhost:8080/reset_password/${resetToken}`;
 
-    const message = `You are receiving this email because you (or someone else) has requested the reset of a password. Please make a PUT request to: \n\n ${resetUrl}`;
+    const message = `You are receiving this email because you (or someone else) has requested the reset of a password, your new password is a1234567. Please make a PUT request to: \n\n ${resetUrl}`;
 
     console.log(message);
     try {
@@ -258,6 +229,7 @@ exports.forgotPassword = asyncHandler(
 exports.resetPassword = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     // Get hashed token
+    console.log("resetPassword::");
     const resetPasswordToken = crypto
       .createHash("sha256")
       .update(req.params.reset_token)
@@ -274,12 +246,14 @@ exports.resetPassword = asyncHandler(
     }
 
     // Set new password
-    user.password = req.body.password;
+    user.password = req.body.newPassword;
     user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined;
     await user.save();
 
-    sendTokenResponse(user, 200, res);
+    res
+      .status(200)
+      .json(success("Reset password success ", {}, res.statusCode));
   }
 );
 
@@ -300,9 +274,8 @@ const sendTokenResponse = (
     options["secure"] = true;
   }
 
-  console.log("TOKEN::", token);
   res
     .status(statusCode)
     .cookie("token", token, options)
-    .json(success("Send Token", { data: token }, res.statusCode));
+    .json(success("Send Token success", { token: token }, res.statusCode));
 };

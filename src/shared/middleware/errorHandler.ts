@@ -44,10 +44,14 @@ const errorHandler = (
     error = new ErrorResponse(message[0], 400, undefined);
   }
 
-  res.status(error.statusCode || 500).json({
-    success: false,
-    error: error.messageWithField || error.message || "Server Error",
-  });
+  res
+    .status(error.statusCode || 500)
+    .json(
+      errors(
+        error.messageWithField || error.message || "Server Error",
+        error.statusCode
+      )
+    );
   res
     .status(error.statusCode || 500)
     .json(
