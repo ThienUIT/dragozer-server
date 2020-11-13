@@ -12,7 +12,6 @@ const advancedResults = (
 ) => async (req: UserRequest, res: ResultsResponse, next: NextFunction) => {
   if (visibility.status == "private") {
     req.query.userId = req["user"];
-    console.log("advanced Results::", req.query.userId);
     if (visibility.filter == "channel") {
       req.query.channelId = req.user._id;
       delete req.query.userId;
@@ -22,7 +21,6 @@ const advancedResults = (
   }
 
   const reqQuery = { ...req.query };
-  console.log("advanced Results::", reqQuery);
 
   const removeFields = ["select", "sort", "page", "limit"];
   removeFields.forEach((param: string) => delete reqQuery[param]);
@@ -67,6 +65,7 @@ const advancedResults = (
   }
 
   const results = await query;
+  console.log("advanced Results::RESULT::::\n", results);
 
   // Pagination result
   const pagination: PaginationResponse = {};
