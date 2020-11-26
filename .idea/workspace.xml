@@ -11,9 +11,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0b60fa34-fba7-404d-80ec-ebb3dfade6e4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/database/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/database/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/auth.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/videos.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/videos.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/shared/middleware/advancedResults.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/middleware/advancedResults.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,6 +75,17 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="serve" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -187,7 +200,39 @@
       <workItem from="1605148487401" duration="2133000" />
       <workItem from="1605185737071" duration="7210000" />
       <workItem from="1605237459464" duration="5151000" />
-      <workItem from="1605263498897" duration="2781000" />
+      <workItem from="1605263498897" duration="8976000" />
+      <workItem from="1605323320884" duration="2722000" />
+      <workItem from="1605454735933" duration="2099000" />
+      <workItem from="1605494565358" duration="3063000" />
+      <workItem from="1605508420757" duration="2538000" />
+      <workItem from="1605520348374" duration="938000" />
+      <workItem from="1605538510142" duration="4767000" />
+      <workItem from="1605549537268" duration="541000" />
+      <workItem from="1605583226044" duration="4608000" />
+      <workItem from="1605620978146" duration="5196000" />
+      <workItem from="1605630130745" duration="157000" />
+      <workItem from="1605632156231" duration="6000" />
+      <workItem from="1605669671248" duration="1686000" />
+      <workItem from="1605673322662" duration="7931000" />
+      <workItem from="1605795310079" duration="3041000" />
+      <workItem from="1605842990019" duration="2441000" />
+      <workItem from="1605871889014" duration="55000" />
+      <workItem from="1605872720192" duration="1782000" />
+      <workItem from="1605881521970" duration="627000" />
+      <workItem from="1605921836626" duration="2206000" />
+      <workItem from="1605965015891" duration="1513000" />
+      <workItem from="1606021019561" duration="1530000" />
+      <workItem from="1606041043712" duration="778000" />
+      <workItem from="1606047958540" duration="3378000" />
+      <workItem from="1606101471833" duration="2330000" />
+      <workItem from="1606134760328" duration="2943000" />
+      <workItem from="1606150523926" duration="2445000" />
+      <workItem from="1606182888958" duration="5567000" />
+      <workItem from="1606217108660" duration="3009000" />
+      <workItem from="1606277194556" duration="3344000" />
+      <workItem from="1606371871013" duration="1926000" />
+      <workItem from="1606384117288" duration="271000" />
+      <workItem from="1606384411376" duration="5701000" />
     </task>
     <servers />
   </component>
@@ -218,6 +263,10 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="589" y="235" width="732" height="644" key="#Inspections/0.27.1920.1053@0.27.1920.1053" timestamp="1603272641927" />
+    <state x="555" y="197" width="800" height="719" key="#Plugins" timestamp="1606384340675">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="555" y="197" width="800" height="719" key="#Plugins/0.27.1920.1053@0.27.1920.1053" timestamp="1606384340674" />
     <state x="675" y="355" width="559" height="403" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1602788816084">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -262,10 +311,10 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="100" y="127" width="1720" height="853" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1602865246773" />
-    <state x="217" y="314" width="618" height="522" key="find.popup" timestamp="1605240424801">
+    <state x="217" y="314" width="618" height="522" key="find.popup" timestamp="1605629036680">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="217" y="314" width="618" height="522" key="find.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1605240424801" />
+    <state x="217" y="314" width="618" height="522" key="find.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1605629036680" />
     <state x="269" y="155" width="1372" height="803" key="new project wizard" timestamp="1602783912259">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>

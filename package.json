@@ -8,6 +8,7 @@
     "dev": "nodemon --exec ts-node src/index.ts",
     "prod": "npm run build && npm run start",
     "build": "tsc -p",
+    "kill": "sudo lsof -t -i tcp:8000 | xargs kill -s 9",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

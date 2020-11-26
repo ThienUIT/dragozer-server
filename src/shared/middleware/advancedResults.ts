@@ -65,7 +65,6 @@ const advancedResults = (
   }
 
   const results = await query;
-  console.log("advanced Results::RESULT::::\n", results);
 
   // Pagination result
   const pagination: PaginationResponse = {};
