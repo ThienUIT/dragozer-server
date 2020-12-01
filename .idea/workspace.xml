@@ -12,10 +12,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0b60fa34-fba7-404d-80ec-ebb3dfade6e4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/feelings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/feelings.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/videos.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/videos.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/const/default_schema.const.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/const/default_schema.const.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/enum/schema.enum.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/enum/schema.enum.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -230,7 +226,8 @@
       <workItem from="1606653578594" duration="335000" />
       <workItem from="1606657413837" duration="7737000" />
       <workItem from="1606708979952" duration="4172000" />
-      <workItem from="1606726237129" duration="5518000" />
+      <workItem from="1606726237129" duration="5539000" />
+      <workItem from="1606795236813" duration="926000" />
     </task>
     <servers />
   </component>
