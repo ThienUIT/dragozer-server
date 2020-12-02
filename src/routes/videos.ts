@@ -18,23 +18,23 @@ const { protect } = require("@/shared/middleware/auth");
 
 routerVideos.post("/", protect, videoUpload);
 
-routerVideos.route("/private").get(
-  protect,
-  advancedResultsVideos(
-    Video,
-    [
-      { path: "userId" },
-      { path: "categoryId" },
-      { path: "likes" },
-      { path: "dislikes" },
-      { path: "comments" },
-    ],
-    {
-      status: "private",
-    }
-  ),
-  getVideos
-);
+routerVideos
+  .route("/private")
+  .get(
+    protect,
+    advancedResultsVideos(
+      Video,
+      [
+        { path: "userId" },
+        { path: "categoryId" },
+        { path: "likes" },
+        { path: "dislikes" },
+        { path: "comments" },
+      ],
+      { status: "private" }
+    ),
+    getVideos
+  );
 
 routerVideos
   .route("/public")

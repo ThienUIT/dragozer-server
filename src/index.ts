@@ -50,12 +50,12 @@ app.use(
 );
 
 // Rate limiting
-app.use(
-  rateLimit({
-    windowMs: 10 * 60 * 1000, // 10 mins
-    max: 100, // 100 request per 10 mins
-  })
-);
+// app.use(
+//   rateLimit({
+//     windowMs: 10 * 60 * 1000, // 10 mins
+//     max: 100, // 100 request per 10 mins
+//   })
+// );
 
 // Prevent http param pollution
 app.use(hpp());

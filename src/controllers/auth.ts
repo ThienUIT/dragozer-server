@@ -158,7 +158,7 @@ exports.uploadChannelAvatar = asyncHandler(
     });
     return res
       .status(200)
-      .json(success("User is updated ", { data: user }, res.statusCode));
+      .json(success("Avatar is updated ", { data: user }, res.statusCode));
   }
 );
 

@@ -39,7 +39,6 @@ exports.getVideo = asyncHandler(
           errors(`No video with that id of ${req.params.id}`, res.statusCode)
         );
     }
-
     res.status(200).json(success("OK", { data: video }, res.statusCode));
   }
 );
@@ -58,7 +57,7 @@ exports.videoUpload = asyncHandler(
       url,
       thumbnailUrl,
     } = req.body;
-    await Video.create({
+    const video = await Video.create({
       userId: id,
       thumbnailUrl: thumbnailUrl,
       title: title,
@@ -67,7 +66,7 @@ exports.videoUpload = asyncHandler(
       status: status,
       url: url,
     });
-    return res.status(200).json(success("Ok", {}, res.statusCode));
+    return res.status(200).json(success("Ok", { data: video }, res.statusCode));
   }
 );
 // @desc    Update video
@@ -192,37 +191,8 @@ exports.deleteVideo = asyncHandler(
         );
     }
 
-    fs.unlink(
-      `${process.env.FILE_UPLOAD_PATH}/videos/${video.url}`,
-      async (err: Error) => {
-        if (err) {
-          return res
-            .status(500)
-            .json(
-              errors(
-                `Something went wrong, couldn't delete video photo`,
-                res.statusCode
-              )
-            );
-        }
-        fs.unlink(
-          `${process.env.FILE_UPLOAD_PATH}/thumbnails/${video.thumbnailUrl}`,
-          async (err: Error) => {
-            // if (err) {
-            //   return next(
-            //     new ErrorResponse(
-            //       `Something went wrong, couldn't delete video photo`,
-            //       500
-            //     )
-            //   )
-            // }
-            await video.remove();
-            res
-              .status(200)
-              .json(success("OK", { data: video }, res.statusCode));
-          }
-        );
-      }
-    );
+    await video.remove();
+    console.log("video::", video);
+    res.status(200).json(success("OK", { data: video }, res.statusCode));
   }
 );

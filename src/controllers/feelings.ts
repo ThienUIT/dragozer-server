@@ -51,18 +51,18 @@ exports.createFeeling = asyncHandler(
       });
       return res
         .status(200)
-        .json(success("OK", { data: feeling }, res.statusCode));
+        .json(success("create", { data: feeling }, res.statusCode));
     }
     // else - check req.body.feeling if equals to feeling.type remove
     if (type == feeling.type) {
       await feeling.remove();
-      return res.status(200).json(success("OK", {}, res.statusCode));
+      return res.status(200).json(success("remove", {}, res.statusCode));
     }
     // else - change feeling type
     feeling.type = type;
     feeling = await feeling.save();
 
-    res.status(200).json(success("OK", { data: feeling }, res.statusCode));
+    res.status(200).json(success("update", { data: feeling }, res.statusCode));
   }
 );
 
