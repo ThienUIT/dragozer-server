@@ -39,7 +39,6 @@ exports.getVideo = asyncHandler(
           errors(`No video with that id of ${req.params.id}`, res.statusCode)
         );
     }
-    console.log(video);
     res.status(200).json(success("OK", { data: video }, res.statusCode));
   }
 );

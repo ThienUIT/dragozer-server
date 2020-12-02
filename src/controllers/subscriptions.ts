@@ -42,8 +42,8 @@ exports.checkSubscription = asyncHandler(
 
     if (!channel) {
       return res
-        .status(404)
-        .json(errors("You are not have channel", res.statusCode));
+        .status(200)
+        .json(success("You are not have channel", {}, res.statusCode));
     }
 
     return res
@@ -74,7 +74,7 @@ exports.createSubscriber = asyncHandler(
 
     if (subscription) {
       await subscription.remove();
-      return res.status(200).json(success("OK", {}, res.statusCode));
+      return res.status(200).json(success("remove", {}, res.statusCode));
     } else {
       subscription = await Subscription.create({
         subscriberId: req.user._id,
@@ -82,7 +82,9 @@ exports.createSubscriber = asyncHandler(
       });
     }
 
-    res.status(200).json(success("OK", { data: subscription }, res.statusCode));
+    res
+      .status(200)
+      .json(success("create", { data: subscription }, res.statusCode));
   }
 );
 
