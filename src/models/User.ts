@@ -71,7 +71,7 @@ UserSchema.virtual("subscribers", {
   foreignField: "channelId",
   justOne: false,
   count: true,
-  match: { userId: UserSchema._id },
+  match: { channelId: UserSchema._id },
 });
 
 UserSchema.virtual("videos", {
@@ -79,7 +79,8 @@ UserSchema.virtual("videos", {
   localField: "_id",
   foreignField: "userId",
   justOne: false,
-  count: true,
+  count: false,
+  match: { status: "public" },
 });
 
 UserSchema.plugin(uniqueValidator, { message: "{PATH} already exists." });

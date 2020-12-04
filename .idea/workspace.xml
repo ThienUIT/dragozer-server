@@ -11,7 +11,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0b60fa34-fba7-404d-80ec-ebb3dfade6e4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/subscriptions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/subscriptions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/users.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/users.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Subscription.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Subscription.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/User.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/subscriptions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/subscriptions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +41,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -183,6 +188,7 @@
       <workItem from="1605118685474" duration="341000" />
       <workItem from="1605148487401" duration="2133000" />
       <workItem from="1605185737071" duration="7659000" />
+      <workItem from="1607098562656" duration="306000" />
     </task>
     <servers />
   </component>

@@ -4,6 +4,7 @@ const {
   createSubscriber,
   checkSubscription,
   getSubscribedVideos,
+  getVideosSubscriber,
 } = require("@/controllers/subscriptions");
 import express from "express";
 
@@ -37,5 +38,6 @@ routerSubscrip
   );
 
 routerSubscrip.route("/videos").get(protect, getSubscribedVideos);
+routerSubscrip.route("/videos/:id").get(protect, getVideosSubscriber);
 
 module.exports = routerSubscrip;
