@@ -23,10 +23,7 @@ exports.getUsers = asyncHandler(
 // @access  Private/Admin
 exports.getUser = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const user = await User.findById(req.params.id).populate({
-      path: "subscribers",
-    });
-
+    const user = await User.findById(req.params.id).populate("subscribers");
     if (!user)
       return res
         .status(404)

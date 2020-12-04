@@ -4,30 +4,33 @@ const {
   createSubscriber,
   checkSubscription,
   getSubscribedVideos,
+  getVideosSubscriber,
 } = require("@/controllers/subscriptions");
 import express from "express";
 
 const Subscription = require("@/models/Subscription");
 
-const routerSubscrip = express.Router();
+const routerSubscription = express.Router();
 
 const advancedResultsSubscrip = require("@/shared/middleware/advancedResults");
 const { protect } = require("@/shared/middleware/auth");
 
-routerSubscrip.post("/", protect, createSubscriber);
+routerSubscription.post("/", protect, createSubscriber);
 
-routerSubscrip.post("/check", protect, checkSubscription);
+routerSubscription.post("/check", protect, checkSubscription);
 
-routerSubscrip.route("/subscribers").get(
-  protect,
-  advancedResultsSubscrip(Subscription, [{ path: "subscriberId" }], {
-    status: "private",
-    filter: "channel",
-  }),
-  getSubscribers
-);
+routerSubscription
+  .route("/subscribers")
+  .get(
+    protect,
+    advancedResultsSubscrip(Subscription, [{ path: "subscriberId" }], {
+      status: "private",
+      filter: "channel",
+    }),
+    getSubscribers
+  );
 
-routerSubscrip
+routerSubscription
   .route("/channels")
   .get(
     advancedResultsSubscrip(Subscription, [
@@ -36,6 +39,6 @@ routerSubscrip
     getChannels
   );
 
-routerSubscrip.route("/videos").get(protect, getSubscribedVideos);
-
-module.exports = routerSubscrip;
+routerSubscription.route("/videos").get(protect, getSubscribedVideos);
+routerSubscription.route("/videos/:id").get(protect, getVideosSubscriber);
+module.exports = routerSubscription;
