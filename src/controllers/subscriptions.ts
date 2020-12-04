@@ -110,32 +110,3 @@ exports.getSubscribedVideos = asyncHandler(
     advancedResultsFunc(req, res, Video, populates, "public", channelsId);
   }
 );
-// @desc    Get channel's subscribers
-// @route   GET /api/v1/subscriptions/videos/:id
-// @access  Private
-exports.getVideosSubscriber = asyncHandler(
-  async (req: UserRequest, res: Response, next: NextFunction) => {
-    const channels = await Subscription.find({
-      channelId: req.params.id,
-    });
-
-    if (channels.length === 0)
-      return res.status(200).json(success("OK", {}, res.statusCode));
-
-    const channelsId = channels.map((channel: any) => {
-      return {
-        userId: channel.channelId.toString(),
-      };
-    });
-
-    const populates = [
-      {
-        path: "channelId",
-        // Get videos of user
-        populate: { path: "videos" },
-      },
-      { path: "userId" },
-    ];
-    advancedResultsFunc(req, res, Video, populates, "public", channelsId);
-  }
-);
