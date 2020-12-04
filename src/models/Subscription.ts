@@ -16,14 +16,4 @@ const subscriptionSchema = new Schema(
   },
   { timestamps: true }
 );
-
-subscriptionSchema.virtual("videos", {
-  ref: "Video",
-  localField: "channelId",
-  foreignField: "userId",
-  justOne: false,
-  count: false,
-  match: { status: "public" },
-});
-
 module.exports = mongoose.model("Subscription", subscriptionSchema);

@@ -2,6 +2,7 @@ import { PaginationResponse } from "@/config/response/pagination.response";
 import { UserRequest } from "@/config/request/user.requestt";
 import { ResultsResponse } from "@/config/response/advance_results.response";
 
+const { success, errors } = require("@/shared/utils/responseApi");
 module.exports = async (
   req: UserRequest,
   res: ResultsResponse,

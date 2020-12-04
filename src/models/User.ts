@@ -1,5 +1,5 @@
 import crypto from "crypto";
-import { Document, HookNextFunction } from "mongoose";
+import { HookNextFunction } from "mongoose";
 import { ValidDataConst } from "@/shared/const/valid_data_const";
 import { DefaultSchemaConst } from "@/shared/const/default_schema.const";
 import { SchemaEnum } from "@/shared/enum/schema.enum";
@@ -9,6 +9,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const uniqueValidator = require("mongoose-unique-validator");
+
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema(
@@ -70,7 +71,7 @@ UserSchema.virtual("subscribers", {
   foreignField: "channelId",
   justOne: false,
   count: true,
-  match: { channelId: UserSchema._id },
+  match: { userId: UserSchema._id },
 });
 
 UserSchema.virtual("videos", {
@@ -78,8 +79,7 @@ UserSchema.virtual("videos", {
   localField: "_id",
   foreignField: "userId",
   justOne: false,
-  count: false,
-  match: { status: "public" },
+  count: true,
 });
 
 UserSchema.plugin(uniqueValidator, { message: "{PATH} already exists." });
@@ -88,7 +88,6 @@ UserSchema.pre("find", function () {
   // @ts-ignore
   const currentUser = this;
   currentUser.populate({ path: "subscribers" });
-  // currentUser.populate({path:"videos"})
 });
 
 // Ecrypt Password
