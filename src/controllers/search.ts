@@ -13,14 +13,23 @@ const User = require("@/models/User");
 exports.search = asyncHandler(
   async (req: UserRequest, res: Response, next: NextFunction) => {
     const text = req.body.text;
-
-    let channels = await User.find({ $text: { $search: text } }).populate({
-      path: "videos",
-    });
-    const videos = await Video.find({ $text: { $search: text } }).populate({
+    let channels = await User.find({
+      channelName: { $regex: text, $options: "i" },
+    })
+      .populate({
+        path: "videos",
+      })
+      .populate({
+        path: "videos",
+        populate: { path: "userId" },
+      });
+    const videos = await Video.find({
+      title: { $regex: text, $options: "i" },
+    }).populate({
       path: "userId",
     });
 
+    console.log(videos);
     channels.push(...videos);
 
     let search = channels;
