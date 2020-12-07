@@ -7,7 +7,6 @@ const { success, errors } = require("@/shared/utils/responseApi");
 
 const Video = require("@/models/Video");
 const Subscription = require("@/models/Subscription");
-
 // @desc    Get all subscribers
 // @route   GET /api/v1/subscriptions/subscribers
 // @access  Private
@@ -119,8 +118,9 @@ exports.getVideosSubscriber = asyncHandler(
       channelId: req.params.id,
     });
 
-    if (channels.length === 0)
+    if (channels.length === 0) {
       return res.status(200).json(success("OK", {}, res.statusCode));
+    }
 
     const channelsId = channels.map((channel: any) => {
       return {

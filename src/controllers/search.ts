@@ -25,12 +25,11 @@ exports.search = asyncHandler(
       });
     const videos = await Video.find({
       title: { $regex: text, $options: "i" },
+      status: "public",
     }).populate({
       path: "userId",
     });
-
-    console.log(videos);
-    channels.push(...videos);
+    // channels.push(...videos);
 
     let search = channels;
 
@@ -73,7 +72,11 @@ exports.search = asyncHandler(
           )
         );
     } else {
-      res.status(200).json(success("Search", { data: search }, res.statusCode));
+      res
+        .status(200)
+        .json(
+          success("Search", { users: channels, videos: videos }, res.statusCode)
+        );
     }
   }
 );
