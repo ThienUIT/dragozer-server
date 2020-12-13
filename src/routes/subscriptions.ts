@@ -1,7 +1,7 @@
 const {
   getChannels,
   getSubscribers,
-  createSubscriber,
+  subscribe,
   checkSubscription,
   getSubscribedVideos,
   getVideosSubscriber,
@@ -15,7 +15,7 @@ const routerSubscrip = express.Router();
 const advancedResultsSubscrip = require("@/shared/middleware/advancedResults");
 const { protect } = require("@/shared/middleware/auth");
 
-routerSubscrip.post("/", protect, createSubscriber);
+routerSubscrip.post("/", protect, subscribe);
 
 routerSubscrip.post("/check", protect, checkSubscription);
 

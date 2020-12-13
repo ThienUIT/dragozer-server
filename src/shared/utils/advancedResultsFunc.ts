@@ -87,7 +87,7 @@ module.exports = async (
       count: results.length,
       totalPage,
       pagination,
-      data: results,
+      results: results,
     });
     // res.json(success("OK", {
     //     count: results.length,
@@ -98,7 +98,7 @@ module.exports = async (
   } else {
     res.json({
       success: true,
-      data: results,
+      results: results,
     });
   }
 };

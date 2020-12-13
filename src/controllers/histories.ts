@@ -30,7 +30,7 @@ exports.createHistory = asyncHandler(
           .status(404)
           .json(
             errors(
-              `No video with that id of ${req.body.videoId}`,
+              `Video did not find with id ${req.body.videoId}`,
               res.statusCode
             )
           );
@@ -40,7 +40,6 @@ exports.createHistory = asyncHandler(
       ...req.body,
       userId: req.user.id,
     });
-
     return res
       .status(200)
       .json(success("OK", { data: history }, res.statusCode));

@@ -12,9 +12,13 @@
   <component name="ChangeListManager">
     <list default="true" id="0b60fa34-fba7-404d-80ec-ebb3dfade6e4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/search.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/search.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/histories.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/histories.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/subscriptions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/subscriptions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/users.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/users.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/feelings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/feelings.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/histories.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/histories.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/subscriptions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/subscriptions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/middleware/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/middleware/auth.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/utils/advancedResultsFunc.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/utils/advancedResultsFunc.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,7 +196,19 @@
       <workItem from="1607221122107" duration="694000" />
       <workItem from="1607243064649" duration="2240000" />
       <workItem from="1607257468978" duration="1282000" />
-      <workItem from="1607309877771" duration="5095000" />
+      <workItem from="1607309877771" duration="8837000" />
+      <workItem from="1607404984978" duration="718000" />
+      <workItem from="1607501561825" duration="91000" />
+      <workItem from="1607570600172" duration="1070000" />
+      <workItem from="1607579685222" duration="2461000" />
+      <workItem from="1607591752876" duration="159000" />
+      <workItem from="1607617701902" duration="2738000" />
+      <workItem from="1607657318057" duration="1851000" />
+      <workItem from="1607670507592" duration="413000" />
+      <workItem from="1607687175221" duration="656000" />
+      <workItem from="1607696295759" duration="336000" />
+      <workItem from="1607771952911" duration="9070000" />
+      <workItem from="1607830053678" duration="2286000" />
     </task>
     <servers />
   </component>

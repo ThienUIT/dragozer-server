@@ -54,7 +54,7 @@ exports.checkSubscription = asyncHandler(
 // @desc    Create subscriber
 // @route   Post /api/v1/subscriptions
 // @access  Private
-exports.createSubscriber = asyncHandler(
+exports.subscribe = asyncHandler(
   async (req: UserRequest, res: Response, next: NextFunction) => {
     const { channelId } = req.body;
 
