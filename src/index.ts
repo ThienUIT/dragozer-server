@@ -65,7 +65,7 @@ app.use(errorHandler);
 //Route init
 route(app);
 
-const server = app.listen(APP_PORT, () => {
+const server = app.listen(8000, () => {
   console.log(colors.cyan.underline.bold(`Servers running ${APP_PORT}`));
 });
 // Handle unhandled promise rejections
