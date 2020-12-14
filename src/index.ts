@@ -35,10 +35,10 @@ app.use(
 app.use(mongoSanitize());
 
 // Set security headers
-// app.use(helmet());
+app.use(helmet());
 
 // Prevent XSS attacks
-// app.use(xss());
+app.use(xss());
 
 // Enable CORS
 app.use(
@@ -57,7 +57,7 @@ app.use(
 // );
 
 // Prevent http param pollution
-// app.use(hpp());
+app.use(hpp());
 
 // error Handler
 app.use(errorHandler);
