@@ -16,7 +16,7 @@ switch (process.env.NODE_ENV) {
 }
 
 export const MAX_FILE_UPLOAD: number = parseInt(process.env.MAX_FILE_UPLOAD!);
-export const APP_PORT = process.env.APP_PORT;
+export const APP_PORT = process.env.APP_PORT || 8000;
 export const APP_CONNECT_DATABASE = process.env.APP_CONNECT_DATABASE;
 export const APP_CONNECT_MLAB = process.env.APP_CONNECT_MLAB;
 export const COOKIE_EXPIRE: number = parseInt(process.env.COOKIE_EXPIRE!);
