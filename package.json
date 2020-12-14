@@ -4,9 +4,8 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "start": "npm run build && node dist/index.js",
+    "start": "tsc -p . && node dist/index.js",
     "dev": "nodemon --exec ts-node src/index.ts",
-    "build": "tsc -p .",
     "kill": "sudo lsof -t -i tcp:8000 | xargs kill -s 9",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
