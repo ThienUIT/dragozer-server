@@ -35,15 +35,15 @@ app.use(
 app.use(mongoSanitize());
 
 // Set security headers
-app.use(helmet());
+// app.use(helmet());
 
 // Prevent XSS attacks
-app.use(xss());
+// app.use(xss());
 
 // Enable CORS
 app.use(
   cors({
-    origin: ["https://dragozero.netlify.app"],
+    origin: ["https://dragozero.netlify.app", "http://localhost:8080"],
     optionsSuccessStatus: 200,
   })
 );
@@ -57,7 +57,7 @@ app.use(
 // );
 
 // Prevent http param pollution
-app.use(hpp());
+// app.use(hpp());
 
 // error Handler
 app.use(errorHandler);
