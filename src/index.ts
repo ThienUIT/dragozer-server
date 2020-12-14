@@ -43,11 +43,7 @@ app.use(xss());
 // Enable CORS
 app.use(
   cors({
-    origin: [
-      "http://localhost",
-      "http://localhost:8080",
-      "https://dragozero.netlify.app",
-    ],
+    origin: ["https://dragozero.netlify.app"],
     optionsSuccessStatus: 200,
   })
 );
@@ -69,7 +65,7 @@ app.use(errorHandler);
 //Route init
 route(app);
 
-const server = app.listen(8000, () => {
+const server = app.listen(APP_PORT, () => {
   console.log(colors.cyan.underline.bold(`Servers running ${APP_PORT}`));
 });
 // Handle unhandled promise rejections
