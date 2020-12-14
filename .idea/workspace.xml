@@ -547,7 +547,6 @@
     <option name="version" value="3" />
     <option name="exactExcludedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/index.js" />
         <option value="$PROJECT_DIR$/src/config/database/config_env.js" />
         <option value="$PROJECT_DIR$/src/index.js" />
       </list>
