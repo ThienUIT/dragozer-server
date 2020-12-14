@@ -4,14 +4,14 @@ const {
   createUser,
   updateUser,
   deleteUser,
-} = require("@/controllers/users");
+} = require("../controllers/users");
 
-const User = require("@/models/User");
+const User = require("../models/User");
 import express from "express";
 const routerUser = express.Router({ mergeParams: true });
 
-const advancedResultsUser = require("@/shared/middleware/advancedResults");
-const { protect, authorize } = require("@/shared/middleware/auth");
+const advancedResultsUser = require("../shared/middleware/advancedResults");
+const { protect, authorize } = require("../shared/middleware/auth");
 
 routerUser
   .route("/")

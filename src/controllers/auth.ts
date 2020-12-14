@@ -1,19 +1,15 @@
 import { NextFunction, Request, Response } from "express";
-import {
-  COOKIE_EXPIRE,
-  GOOGLE_CLIENT_ID,
-  MAX_FILE_UPLOAD,
-} from "@/config/database/config_env";
-import { UserRequest } from "@/config/request/user.requestt";
+import { COOKIE_EXPIRE, GOOGLE_CLIENT_ID } from "../config/database/config_env";
+import { UserRequest } from "../config/request/user.request";
 
 const { OAuth2Client } = require("google-auth-library");
 
 const crypto = require("crypto");
 const path = require("path");
-const asyncHandler = require("@/shared/middleware/async");
-const { success, errors } = require("@/shared/utils/responseApi");
-const sendEmail = require("@/shared/utils/sendEmail");
-const User = require("@/models/User");
+const asyncHandler = require("../shared/middleware/async");
+const { success, errors } = require("../shared/utils/responseApi");
+const sendEmail = require("../shared/utils/sendEmail");
+const User = require("../models/User");
 
 // @desc    Register user
 // @route   POST /api/v1/auth/register

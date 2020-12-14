@@ -1,11 +1,10 @@
-import "module-alias/register";
-import { APP_PORT } from "@/config/database/config_env";
+import { APP_PORT } from "./config/database/config_env";
 
 const colors = require("colors");
 const express = require("express");
 const logger = require("morgan");
 const cookieParser = require("cookie-parser");
-import bodyParser from "body-parser";
+const bodyParser = require("body-parser");
 const mongoSanitize = require("express-mongo-sanitize");
 const rateLimit = require("express-rate-limit");
 const fileUpload = require("express-fileupload");
@@ -13,9 +12,9 @@ const helmet = require("helmet");
 const xss = require("xss-clean");
 const hpp = require("hpp");
 const cors = require("cors");
-const errorHandler = require("@/shared/middleware/errorHandler");
-const route = require("@/routes");
-const db = require("@/config/database");
+const errorHandler = require("./shared/middleware/errorHandler");
+const route = require("./routes");
+const db = require("./config/database");
 const app = express();
 
 db.connect();

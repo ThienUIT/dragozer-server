@@ -1,12 +1,12 @@
 import { NextFunction, Request, Response } from "express";
-import { UserRequest } from "@/config/request/user.requestt";
+import { UserRequest } from "../config/request/user.request";
 
-const asyncHandler = require("@/shared/middleware/async");
-const advancedResultsFunc = require("@/shared/utils/advancedResultsFunc");
-const { success, errors } = require("@/shared/utils/responseApi");
+const asyncHandler = require("../shared/middleware/async");
+const advancedResultsFunc = require("../shared/utils/advancedResultsFunc");
+const { success, errors } = require("../shared/utils/responseApi");
 
-const Video = require("@/models/Video");
-const Subscription = require("@/models/Subscription");
+const Video = require("../models/Video");
+const Subscription = require("../models/Subscription");
 // @desc    Get all subscribers
 // @route   GET /api/v1/subscriptions/subscribers
 // @access  Private

@@ -4,7 +4,7 @@ import colors from "colors";
 import {
   APP_CONNECT_DATABASE,
   APP_CONNECT_MLAB,
-} from "@/config/database/config_env";
+} from "../../config/database/config_env";
 
 // async function connect() {
 //   try {

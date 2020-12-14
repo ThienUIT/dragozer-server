@@ -6,15 +6,15 @@ const {
   updateViews,
   uploadVideoThumbnail,
   deleteVideo,
-} = require("@/controllers/videos");
+} = require("../controllers/videos");
 import express from "express";
 
-const Video = require("@/models/Video");
+const Video = require("../models/Video");
 
 const routerVideos = express.Router();
 
-const advancedResultsVideos = require("@/shared/middleware/advancedResults");
-const { protect } = require("@/shared/middleware/auth");
+const advancedResultsVideos = require("../shared/middleware/advancedResults");
+const { protect } = require("../shared/middleware/auth");
 
 routerVideos.post("/", protect, videoUpload);
 

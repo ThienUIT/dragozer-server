@@ -1,12 +1,12 @@
 import { NextFunction, Request, Response } from "express";
-import { MAX_FILE_UPLOAD } from "@/config/database/config_env";
-import { UserRequest } from "@/config/request/user.requestt";
+import { MAX_FILE_UPLOAD } from "../config/database/config_env";
+import { UserRequest } from "../config/request/user.request";
 
-const { success, errors } = require("@/shared/utils/responseApi");
+const { success, errors } = require("../shared/utils/responseApi");
 
 const path = require("path");
 const fs = require("fs");
-const asyncHandler = require("@/shared/middleware/async");
+const asyncHandler = require("../shared/middleware/async");
 
 const Video = require("../models/Video");
 

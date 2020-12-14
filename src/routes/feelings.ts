@@ -2,12 +2,12 @@ const {
   createFeeling,
   checkFeeling,
   getLikedVideos,
-} = require("@/controllers/feelings");
+} = require("../controllers/feelings");
 import express from "express";
 
 const routerFeelings = express.Router();
 
-const { protect } = require("@/shared/middleware/auth");
+const { protect } = require("../shared/middleware/auth");
 
 routerFeelings.use(protect);
 
