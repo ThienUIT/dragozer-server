@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response } from "express";
-import { ResultsResponse } from "@/config/response/advance_results.response";
+import { ResultsResponse } from "../config/response/advance_results.response";
 
-const { success, errors } = require("@/shared/utils/responseApi");
+const { success, errors } = require("../shared/utils/responseApi");
 
-const asyncHandler = require("@/shared/middleware/async");
+const asyncHandler = require("../shared/middleware/async");
 
-const User = require("@/models/User");
+const User = require("../models/User");
 
 // @desc    Get all users
 // @route   GET /api/v1/auth/users

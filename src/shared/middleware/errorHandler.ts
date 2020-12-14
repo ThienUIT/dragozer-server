@@ -1,8 +1,8 @@
 import { NextFunction, Response, Request } from "express";
 import colors from "colors";
 
-const { ErrorResponse } = require("@/shared/utils/errorResponse");
-const { errors } = require("@/shared/utils/responseApi");
+const { ErrorResponse } = require("../utils/errorResponse");
+const { errors } = require("../utils/responseApi");
 const errorHandler = (
   err: typeof ErrorResponse,
   req: Request,

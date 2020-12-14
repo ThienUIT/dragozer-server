@@ -1,9 +1,9 @@
 // @eg      channelName=reagan&select=email&sort=-channelName,email
 
 import { NextFunction } from "express";
-import { PaginationResponse } from "@/config/response/pagination.response";
-import { UserRequest } from "@/config/request/user.requestt";
-import { ResultsResponse } from "@/config/response/advance_results.response";
+import { PaginationResponse } from "../../config/response/pagination.response";
+import { UserRequest } from "../../config/request/user.request";
+import { ResultsResponse } from "../../config/response/advance_results.response";
 
 const advancedResults = (
   model: any,

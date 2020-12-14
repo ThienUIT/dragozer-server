@@ -1,12 +1,12 @@
 import { NextFunction, Request, Response } from "express";
-import { UserRequest } from "@/config/request/user.requestt";
-import { ResultsResponse } from "@/config/response/advance_results.response";
+import { UserRequest } from "../config/request/user.request";
+import { ResultsResponse } from "../config/response/advance_results.response";
 
-const asyncHandler = require("@/shared/middleware/async");
-const { success, errors } = require("@/shared/utils/responseApi");
+const asyncHandler = require("../shared/middleware/async");
+const { success, errors } = require("../shared/utils/responseApi");
 
-const Comment = require("@/models/Comment");
-const Reply = require("@/models/Reply");
+const Comment = require("../models/Comment");
+const Reply = require("../models/Reply");
 
 // @desc    Get comments
 // @route   GET /api/v1/replies

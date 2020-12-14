@@ -3,13 +3,13 @@ const {
   createComment,
   updateComment,
   deleteComment,
-} = require("@/controllers/comments");
+} = require("../controllers/comments");
 import express from "express";
 
 const routerComments = express.Router();
 
 // const advancedResults = require('../middleware/advancedResults')
-const { protect } = require("@/shared/middleware/auth");
+const { protect } = require("../shared/middleware/auth");
 
 routerComments
   .route("/")

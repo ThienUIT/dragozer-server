@@ -4,15 +4,15 @@ const {
   createCategory,
   updateCategory,
   deleteCategory,
-} = require("@/controllers/categories");
+} = require("../controllers/categories");
 
 import express from "express";
-const Category = require("@/models/Category");
+const Category = require("../models/Category");
 
 const routerCategories = express.Router();
 
-const advancedResultsCategories = require("@/shared/middleware/advancedResults");
-const { protect, authorize } = require("@/shared/middleware/auth");
+const advancedResultsCategories = require("../shared/middleware/advancedResults");
+const { protect, authorize } = require("../shared/middleware/auth");
 
 routerCategories.use(protect);
 

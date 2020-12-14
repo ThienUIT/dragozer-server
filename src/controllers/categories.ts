@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from "express";
-import { UserRequest } from "@/config/request/user.requestt";
+import { UserRequest } from "../config/request/user.request";
 
-const { success, errors } = require("@/shared/utils/responseApi");
+const { success, errors } = require("../shared/utils/responseApi");
 
-const asyncHandler = require("@/shared/middleware/async");
-const Category = require("@/models/Category");
+const asyncHandler = require("../shared/middleware/async");
+const Category = require("../models/Category");
 
 // @desc    Get categories
 // @route   GET /api/v1/categories

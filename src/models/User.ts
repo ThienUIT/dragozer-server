@@ -1,9 +1,9 @@
 import crypto from "crypto";
 import { HookNextFunction } from "mongoose";
-import { ValidDataConst } from "@/shared/const/valid_data_const";
-import { DefaultSchemaConst } from "@/shared/const/default_schema.const";
-import { SchemaEnum } from "@/shared/enum/schema.enum";
-import { COOKIE_EXPIRE, TEXT_SECRET } from "@/config/database/config_env";
+import { ValidDataConst } from "../shared/const/valid_data_const";
+import { DefaultSchemaConst } from "../shared/const/default_schema.const";
+import { SchemaEnum } from "../shared/enum/schema.enum";
+import { COOKIE_EXPIRE, TEXT_SECRET } from "../config/database/config_env";
 
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");

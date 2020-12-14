@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response } from "express";
-import { UserRequest } from "@/config/request/user.requestt";
+import { UserRequest } from "../config/request/user.request";
 
-const asyncHandler = require("@/shared/middleware/async");
-const { success } = require("@/shared/utils/responseApi");
+const asyncHandler = require("../shared/middleware/async");
+const { success } = require("../shared/utils/responseApi");
 
-const Video = require("@/models/Video");
-const User = require("@/models/User");
+const Video = require("../models/Video");
+const User = require("../models/User");
 
 // @desc    Search for videos and channels
 // @route   POST /api/v1/search/

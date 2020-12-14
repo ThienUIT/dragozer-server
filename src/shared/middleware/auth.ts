@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from "express";
-import { UserRequest } from "@/config/request/user.requestt";
+import { UserRequest } from "../../config/request/user.request";
 
 const jwt = require("jsonwebtoken");
 const asyncHandler = require("./async");
-const { validation } = require("@/shared/utils/responseApi");
-const User = require("@/models/User");
+const { validation } = require("../utils/responseApi");
+const User = require("../../models/User");
 // protect route from away guest
 exports.protect = asyncHandler(
   async (req: UserRequest, res: Response, next: NextFunction) => {

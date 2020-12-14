@@ -1,4 +1,4 @@
-const { search } = require("@/controllers/search");
+const { search } = require("../controllers/search");
 import express from "express";
 
 const routerSearch = express.Router();

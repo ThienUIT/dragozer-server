@@ -1,13 +1,13 @@
 import { NextFunction, Response } from "express";
-import { UserRequest } from "@/config/request/user.requestt";
+import { UserRequest } from "../config/request/user.request";
 
-const asyncHandler = require("@/shared/middleware/async");
-const { success, errors } = require("@/shared/utils/responseApi");
+const asyncHandler = require("../shared/middleware/async");
+const { success, errors } = require("../shared/utils/responseApi");
 
-const advancedResultsFunc = require("@/shared/utils/advancedResultsFunc");
+const advancedResultsFunc = require("../shared/utils/advancedResultsFunc");
 
-const Video = require("@/models/Video");
-const Feeling = require("@/models/Feeling");
+const Video = require("../models/Video");
+const Feeling = require("../models/Feeling");
 
 // @desc    Create feeling
 // @route   POST /api/v1/feelings/

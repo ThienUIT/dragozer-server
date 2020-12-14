@@ -5,15 +5,15 @@ const {
   checkSubscription,
   getSubscribedVideos,
   getVideosSubscriber,
-} = require("@/controllers/subscriptions");
+} = require("../controllers/subscriptions");
 import express from "express";
 
-const Subscription = require("@/models/Subscription");
+const Subscription = require("../models/Subscription");
 
 const routerSubscrip = express.Router();
 
-const advancedResultsSubscrip = require("@/shared/middleware/advancedResults");
-const { protect } = require("@/shared/middleware/auth");
+const advancedResultsSubscrip = require("../shared/middleware/advancedResults");
+const { protect } = require("../shared/middleware/auth");
 
 routerSubscrip.post("/", protect, subscribe);
 

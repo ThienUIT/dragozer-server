@@ -1,7 +1,7 @@
 import express from "express";
 
 const routerAuth = express.Router();
-const { protect } = require("@/shared/middleware/auth");
+const { protect } = require("../shared/middleware/auth");
 
 const {
   register,
@@ -14,7 +14,7 @@ const {
   updateDetails,
   uploadChannelAvatar,
   updatePassword,
-} = require("@/controllers/auth");
+} = require("../controllers/auth");
 
 routerAuth.post("/register", register);
 routerAuth.post("/login", login);

@@ -3,15 +3,15 @@ const {
   createHistory,
   deleteHistory,
   deleteHistories,
-} = require("@/controllers/histories");
+} = require("../controllers/histories");
 import express from "express";
 
-const History = require("@/models/History");
+const History = require("../models/History");
 
 const routerHistories = express.Router();
 
-const advancedResultsHistories = require("@/shared/middleware/advancedResults");
-const { protect } = require("@/shared/middleware/auth");
+const advancedResultsHistories = require("../shared/middleware/advancedResults");
+const { protect } = require("../shared/middleware/auth");
 
 routerHistories.use(protect);
 
