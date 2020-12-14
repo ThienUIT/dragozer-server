@@ -44,7 +44,11 @@ app.use(xss());
 // Enable CORS
 app.use(
   cors({
-    origin: ["http://localhost", "http://localhost:8080"],
+    origin: [
+      "http://localhost",
+      "http://localhost:8080",
+      "https://serene-minsky-e009db.netlify.app",
+    ],
     optionsSuccessStatus: 200,
   })
 );
