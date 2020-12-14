@@ -46,7 +46,7 @@ app.use(
     origin: [
       "http://localhost",
       "http://localhost:8080",
-      "https://serene-minsky-e009db.netlify.app",
+      "https://dragozero.netlify.app",
     ],
     optionsSuccessStatus: 200,
   })
